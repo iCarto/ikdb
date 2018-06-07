@@ -1,0 +1,1 @@
+Esta sección está enfocada a *usuarios* para la instalación y uso de aplicaciones desarrolladas por iCarto, o por terceros que sean de uso habitual en el stack de iCarto
