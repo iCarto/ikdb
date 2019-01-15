@@ -50,8 +50,7 @@ http://docs.geoserver.org/latest/en/user/production/java.html#installing-native-
 ```
 $ sudo cp jai-1_1_3-lib-linux-i586-jdk.bin "${JDK_OWN_PATH}"
 $ cd "${JDK_OWN_PATH}"
-$ sudo sh jai-1_1_3-lib-linux-i586-jdk.bin
-# accept license
+$ sudo sh jai-1_1_3-lib-linux-i586-jdk.bin  # accept license
 $ sudo rm jai-1_1_3-lib-linux-i586-jdk.bin
 ```
 
@@ -64,8 +63,7 @@ sudo cp jai_imageio-1_1-lib-linux-i586-jdk.bin "${JDK_OWN_PATH}"
 $ cd "${JDK_OWN_PATH}"
 $ sudo su
 $ export _POSIX2_VERSION=199209
-$ sh jai_imageio-1_1-lib-linux-i586-jdk.bin
-# accept license
+$ sh jai_imageio-1_1-lib-linux-i586-jdk.bin  # accept license
 $ rm ./jai_imageio-1_1-lib-linux-i586-jdk.bin
 $ exit
 ```
