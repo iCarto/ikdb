@@ -39,7 +39,7 @@ En caso de usar un jdk proporcionado por iCarto se instalara de la siguiente for
 cp jdk1.6.0_45.iCarto.tgz $(dirname "${JDK_OWN_PATH}")
 cd $(dirname "${JDK_OWN_PATH}")
 tar xz --preserve-permission --file=jdk1.6.0_45.iCarto.tgz
-``
+```
 
 ### Instalar jai
 
