@@ -15,16 +15,18 @@ También se excluye, el manejo directo de estos ficheros a través de MS Office,
 https://www.datacamp.com/community/tutorials/python-excel-tutorial
 
 **openpyxl**
-https://automatetheboringstuff.com/chapter12/
-https://medium.com/aubergine-solutions/working-with-excel-sheets-in-python-using-openpyxl-4f9fd32de87f
-https://code.tutsplus.com/tutorials/how-to-work-with-excel-documents-using-python--cms-25698
+
+* https://automatetheboringstuff.com/chapter12/
+* https://medium.com/aubergine-solutions/working-with-excel-sheets-in-python-using-openpyxl-4f9fd32de87f
+* https://code.tutsplus.com/tutorials/how-to-work-with-excel-documents-using-python--cms-25698
 
 **pandas**
-http://www.marcelscharth.com/python/pandas1.html
-https://data-flair.training/blogs/data-wrangling-with-python/
-https://www.tutorialspoint.com/python/python_data_wrangling.htm
-https://www.kdnuggets.com/2017/01/pandas-cheat-sheet.html
-https://towardsdatascience.com/data-wrangling-with-pandas-5b0be151df4e
+
+* http://www.marcelscharth.com/python/pandas1.html
+* https://data-flair.training/blogs/data-wrangling-with-python/
+* https://www.tutorialspoint.com/python/python_data_wrangling.htm
+* https://www.kdnuggets.com/2017/01/pandas-cheat-sheet.html
+* https://towardsdatascience.com/data-wrangling-with-pandas-5b0be151df4e
 
 ## Descripción de las Librerías
 
@@ -49,14 +51,13 @@ En iCarto por defecto usamos **pyexcel**. A pesar de ser más lenta que las dem�
 
 ### OpenPyXL
 OpenPyXL es una librería que se utiliza para leer y excribir archivos Excel 2010 (xlsx/xlsm/xltx/xltm).
-https://openpyxl.readthedocs.io/en/stable/
-https://bitbucket.org/openpyxl/openpyxl
+
+* https://openpyxl.readthedocs.io/en/stable/
+* https://bitbucket.org/openpyxl/openpyxl
 
 Proyecto bien mantenido, con contribuidores y releases periodicas.
 
-
-
-``
+```python
 import openpyxl
 excel_document = openpyxl.load_workbook('sample.xlsx')
 excel_document.get_sheet_names()  # [u'Sheet1']
@@ -93,14 +94,15 @@ sheet.max_column  # Retrieve the maximum amount of columns
 ### xlrd
 
 Es para leer ficheros xls/xlsx. Es complementaria a xlwt.
-https://github.com/python-excel/xlrd
-http://xlrd.readthedocs.io/en/latest/
+
+* https://github.com/python-excel/xlrd
+* http://xlrd.readthedocs.io/en/latest/
 
 xlrd se basa en un objeto workbook que sería equivalente al libro de excel (el fichero completo), objetos sheet que contendrían cada una de las hojas del libro, y las rows que son cada una de las filas de la hoja entre la primera y la última con datos (si hay filas vacias entra la primera y la última con datos devolverán valores nulos.
 
 Extract data from Excel spreadsheets (.xls and .xlsx, versions 2.0 onwards) on any platform. Pure Python (2.7, 3.4+). Strong support for Excel dates. Unicode-aware.
 
-```
+```python
 import xlrd 
 wb = xlrd.open_workbook('sample.xls')
 sheet = wb.sheet_by_index(0) 
@@ -125,10 +127,10 @@ for sheet_name in book.sheet_names():
 Es una librería para escribir o manipular ficheros xls (no xlsx). Es complementaria a xlrd.
 The package itself is pure Python with no dependencies on modules or packages outside the standard Python distribution.
 
-https://github.com/python-excel/xlwt
-https://xlwt.readthedocs.io/en/latest/
+* https://github.com/python-excel/xlwt
+* https://xlwt.readthedocs.io/en/latest/
 
-```
+```python
 from xlwt import Workbook 
 
 wb = Workbook() 
@@ -154,10 +156,10 @@ En iCarto no la hemos probado.
 
 ### Pandas
 
-
 The pandas library has a quick and easy way to read excel (pandas.read_excel) just like pandas.read_csv. If it's mostly just data and nothing too complicated it'll work:
-https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_excel.html
-```
+
+
+```python
 import pandas as pd
 df = pd.read_excel('excel_file.xlsx')  # pandas DataFrame, which is handy for data munging, etc.
 print(df)
@@ -198,8 +200,8 @@ Es un wrapper en torno a distintas librerías como xlrd, openpyxl, ... que propo
 
 Suele ser más lenta que las librerías subyacentes pero a cambio suele proporcionar algunas meta-utilidades chulas, como volcar las tablas a html o rst, ejemplos de como volcar la hoja a base de datos, ...
 
-https://github.com/pyexcel/pyexcel
-http://docs.pyexcel.org/en/latest/index.html
+* https://github.com/pyexcel/pyexcel
+* http://docs.pyexcel.org/en/latest/index.html
 
 ```python
 import pyexcel
@@ -234,7 +236,7 @@ pyexcel.save_as(array=data, dest_file_name="array_data.xls")  # Save the array t
                                     [18, 19, 20, 21]
                                    ]}
 
-pyexcel.save_book_as(bookdict=2d_array_dictionary, dest_file_name="2d_array_data.xls")  # Save the data to a file  
+pyexcel.save_book_as(bookdict=2d_array_dictionary, dest_file_name="2d_array_data.xls")  # Save the data to a file
 ```
 
 ### tablib

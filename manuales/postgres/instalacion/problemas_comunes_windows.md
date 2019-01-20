@@ -81,7 +81,7 @@ A veces aparece también como **Error running post install step. Installation ma
 
 # get_locales.exe unknown signal
 
-![getlocales.exe: child killed : unknown signal](problemas_comunes_windows_images/error_executing_microsoft_vc.png)
+![getlocales.exe: child killed : unknown signal](problemas_comunes_windows_images/get_locales_error.png)
 
 ## Referencias
 
