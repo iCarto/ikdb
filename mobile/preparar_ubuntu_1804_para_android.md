@@ -1,5 +1,3 @@
-
-
 # Preparar Ubuntu 18.04 para desarrollo en Android
 
 Ya vayas a desarrollar aplicaciones híbridas, PWAs o Nativas para Android es útil tener instalado un montón de software, aplicaciones y librerías. Entre ellas:
@@ -95,9 +93,12 @@ Esos valores no son correctos para nuestras configuraciones habituales. Además 
 
 ```bash
 # load_android_envars.sh
+# for android and cordova development
 
 export ANDROID_HOME=$HOME/Android/Sdk/
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk/
+export JAVA_HOME=$HOME/bin/development/jdk1.8.0_102/
+export PATH=$JAVA_HOME/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$HOME/.local/share/umake/bin/:$PATH
 ```
 
 que cargaremos cuando vayamos a desarrollar en Android mediante `source load_android_envars.sh`. 
@@ -125,3 +126,13 @@ Para ello comprobamos en [el dispositivo está configurado para desarrollo](http
 * Correr `adb devices` y aceptar la clave RSA en el dispositivo.
 * `Run -> Run`y seleccionamos el dispositivo.
 * En el dispositivo debería abrirse automáticamente la aplicación de ejemplo que hayamos creado.
+
+## Otros emuladores
+
+El emulador de android es bastante lento, aún así es la mejor opción a la hora de hacer desarrollo. Aquí se presentan algunas alternativas por si fueran de utilidad en algún caso especial.
+
+* [Anbox](http://www.linuxandubuntu.com/home/anbox-runs-android-in-your-linux-without-emulation/) no es un emulador. Es un sistema operativo android corriendo dentro de un container (LXC). Las app se instalan dentro del container mediante `adb`. No es lo más comodo para depurar pero tiene mejor rendimiento que un emulador, por eso se incluye aquí.
+* [Genymotion](https://www.genymotion.com/). Es considerado el mejor. La versión desktop 300€/usuario-año. La versión cloud 0.5€/h
+* [Andy OS](https://www.andyroid.net/). Es una forma de sincronizar el móvil con el ordenador más que otra cosa. Por ejemplo recibir los watsapp, ... en el desktop en lugar de el teléfono. Controlar el ordenador desde el móvil, ...
+* [Android-x86](https://www.android-x86.org/). Port de Android para plataformas x86. Permitiría rular "algo como Android" en un VirtualBox por ejemplo.
+* [Archon](https://github.com/vladikoff/chromeos-apk). Instala aplicaciones Android en Chrome.
