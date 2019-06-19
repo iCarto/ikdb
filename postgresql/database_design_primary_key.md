@@ -114,6 +114,9 @@ GRANT USAGE ON SEQUENCE public.my_gid_seq TO role_edit;
 GRANT SELECT ON public.mytable TO role_view;
 ```
 
+## Curiosidades y otras observaciones
+
+* En general la diferencia entre usar un integer como _surrogate key_, frente a un string como _natural key_ no tiene mejoras de rendimiento, si no más bien posibles penalizaciones. Pero en general no son significativas. [1](https://www.depesz.com/2012/06/07/123-vs-depesz-what-is-faster/). [2](https://www.depesz.com/2012/06/08/123%E2%80%B3-vs-depesz-followup/)
 
 
 ## Referencias
@@ -126,7 +129,7 @@ GRANT SELECT ON public.mytable TO role_view;
 
 
 
-## Investigaciones futuras
+## Investigaciones y mejoras futuras
 
 Para empezar a usar [_natural keys_ en lugar de _surrogate keys_](https://tapoueh.org/blog/2018/03/database-normalization-and-primary-keys/) debemos conocer el comportamiento de distintas aplicaciones y versiones de aplicaciones GIS de escritorio que estén entre nuestro target con:
 
