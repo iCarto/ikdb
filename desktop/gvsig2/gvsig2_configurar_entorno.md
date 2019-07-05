@@ -85,6 +85,16 @@ Esto tarda bastante la primera vez. Se descarga internet y suelen petar cosas.
 
 Cada vez que se haga un cambio, hay que compilar el repo(s) que toquen con ese comando, o desde eclipse.
 
+## Aplicar parches
+
+En la versión 2.3.1-2501 hay varios parches reportados. Pero es necesario aplicarlos al workspace antes de poder trabajar. En `es.icarto.gvsig.sixhiara/portable/common/patches` están los jar compilados. Lo más fácil es sobreescribir los jar originales con estos ya compilados (y reaplicar cada vez que haya un cambio)
+
+```
+bash apply_patches SVN_PATH/target/product
+```
+
+En `es.icarto.gvsig.sixhiara/portable/common/patches/modified_files` están los ficheros java modificados, habría que sobreescribir los originales. Ver fichero de `notas.txt` en ese directorio. No se han generado diffs.
+
 ## Ejecutar y debug
 
 ```
