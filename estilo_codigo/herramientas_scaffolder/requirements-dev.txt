@@ -1,0 +1,6 @@
+pre-commit==1.17.0
+black
+isort
+isort[pyproject]
+# pip install isort[requirements,pipfile] para la proxima release de isort
+
