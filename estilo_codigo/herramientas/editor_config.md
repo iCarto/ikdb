@@ -11,6 +11,14 @@ Una utilidad un poco particular para unificar el estilo de código de un proyect
 
 No es una herramienta de análisis estático, ni un formateador, si no más bien un "estándar" de configuración que los IDEs u otras herramientas pueden usar para compartir ciertos settings en un proyecto, en lugar de los que haya fijado el usuario en su propia configuración. De este modo aunque se usen distintos IDEs en el equipo se puede forzar en parte un estilo uniforme de [forma automática para cada proyecto](http://treyhunner.com/2012/02/editorconfig/).
 
+## EditorConfig y Editores
+
+Lo más habitual es usar EditorConfig a través de un plugin para el editor que evite ir configurando para cada cosa aspectos básicos como el "encoding" o los "trailing spaces". La implementación concreta de EditorConfig en un editor debe ser revisada, dado que no todos soportan todas las funcionalidades esperadas, y algunos pueden dar alguna sorpresa.
+
+-   Ver atom_editor_config.md
+-   Ver pycharma_editor_config.md
+-   Ver emacs_editor_config.md
+
 ## Herramientas adicionales
 
 ### eclint
@@ -54,4 +62,3 @@ Así que, cuales serían las razones para usarlo. O como sería la forma ideal d
 -   No es obligatorio pero se recomienda el uso del plugin para el editor.
 -   No usamos `eclint` de forma genérica porqué tiene demasiados problemas.
 -   [Nuestra configuración](https://gitlab.com/icarto/ikdb/blob/master/estilo_codigo/herramientas_scaffolder/.editorconfig)
-

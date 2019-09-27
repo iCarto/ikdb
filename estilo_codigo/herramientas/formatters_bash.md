@@ -24,7 +24,7 @@ Para probarlo lo más sencillo es usar una imagen de docker:
     docker run --rm -it -v "$(pwd)":/scripts -w /scripts peterdavehello/shfmt:latest shfmt -l -w -i 4 -bn -sr -ci .
 
 -   La opción `-mn` elimina todas las líneas en blanco, comentarios, etc... No parece útil salvo casos excepcionales.
--   La opción `-s` "trata" de simplificar el código, eliminando comillas donde no parecen estrictamente necesarias, y otras operaciones que pueden ser consideradas como peligrosas, y con las que _shellcheck_ dará error. Mejor no usarla. 
+-   La opción `-s` "trata" de simplificar el código, eliminando comillas donde no parecen estrictamente necesarias, y otras operaciones que pueden ser consideradas como peligrosas, y con las que _shellcheck_ dará error. Mejor no usarla.
 -   La opción `-kp` no acabo de entenderla pero genera resultados que no me cuadran.
 
 Tiene plugin propio para [Atom](https://github.com/focusaurus/atom-format-shell) y [VS Code](https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format). Hay al menos dos repos que dan soporte para pre-commit [1](https://github.com/syntaqx/git-hooks), [2](https://github.com/jumanjihouse/pre-commit-hooks) pero para ambos es necesario tener _shfmt_ en el path. No parece haber soporte para Emacs.
@@ -38,13 +38,15 @@ Tiene plugin propio para [Atom](https://github.com/focusaurus/atom-format-shell)
 
 -   Si _Go_ no está en tus lenguajes habituales instalar y mantener actualizado _shfmt_ y _Go_ puede ser bastante incómodo. Para un uso ocasional _docker_ es la mejor solución. Para su uso sólo en _pre-commit_ se puede usar `language: golang` y dejar que \_pre-commit\` construya el ejecutable. Si se va a usar de forma más intensa las mejores opciones son [usar snap](https://snapcraft.io/shfmt) o descargar el binario de la [página de releases](https://github.com/mvdan/sh/releases) y ponerlo en el path.
 
+-   No hay fichero de configuración. Y el mantenedor se resiste a añadir esa funcionalidad. Eso implica configurar a mano en cada punto (ide, pre-commit, ...) el formato. Seguir estos tickets para ver si finalmente es añadido: [#358](https://github.com/mvdan/sh/issues/358), [#393](https://github.com/mvdan/sh/issues/393), [#234](https://github.com/mvdan/sh/issues/234)
+
 # beautysh
 
 [beautysh](https://github.com/lovesegfault/beautysh) es un programa en Python que usa expresiones regulares para reformatear código bash.
 
 Hace menos formato que _shftm_, por ejemplo:
 
--   no transforma backticks a $()
+-   no transforma backticks a `$()`
 -   O respeta una línea donde `do` esté en una línea distinta a `for`, mientras que _shftm_ lo pondrá en la misma línea
 
 Que formato es más "limpio" es muy opinativo, nosotros preferimos el de _shfmt_. Lo mejor de _beautysh_ es que está escrito en Python lo que simplifica su uso e instalación.

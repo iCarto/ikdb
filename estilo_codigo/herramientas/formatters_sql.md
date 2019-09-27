@@ -14,7 +14,9 @@ Está actualizado en el [repositorio de PostgreSQL para Ubuntu](https://www.post
 -   `-b` para usar el formato de coma al principio
 -   `-u2` Poner en mayúsculas las palabras reservadas (`SELECT`, `CREATE FUNCTION`, ...)
 -   `-f2` Poner en mayúsculas las llamadas a funciones (`COALESCE`, `SUBSTRING`, ...
--   `-B` para que en los inserts rompa disintos grupos de values en nuevas líneas
+-   `-B` para que en los inserts rompa distintos grupos de values en nuevas líneas
+-   `-g` deja una línea en blanco entre sentencias cuando están dentro de una transacción
+-   `-t` para algunas sentencias usa un formato alternativo
 
 ```
 echo "INSERT INTO myschema.mytable (foo, bar) VALUES ('a', 1), ('b', 2);" | pg_format -B -b
@@ -54,10 +56,14 @@ SELECT one , two , three
 FROM foo.bar;
 ```
 
-    pg_format -b -B -u2 example.sql
+Las opciones base que usamos son:
+
+    pg_format -b -B -u2 -g example.sql
+    
+Y jugamos con `-t`, `-W x` y `-w x` según el caso. El uso de `-f2` está bajo discusión. En general tratamos de optar por la forma que PostgreSQL usa en su documentación (minúsculas para tipos de datos, mayúsculas para "palabras reservadas", pero el nombre de funciones no es consistente, por ejemplo usa minúsculas para `substring` y mayúsculas para `COALESCE`)
 
 -w | --wrap-limit N : wrap queries at a certain length.
--t | --format-type : try another formatting type for some statements.
+
 
 Tiene plugin para VS Code. El de Atom no está actualizado.
 
@@ -65,7 +71,7 @@ Tiene plugin para VS Code. El de Atom no está actualizado.
 
 -   No es capaz de hacer el reformateo del fichero "in place".
 -   Sólo trabaja los ficheros de uno en uno. Formatear un repositorio completo implica un poco de scripting y probablemente no funcione con _pre-commit_.
--   Elimina todas las líneas en blanco. Si es un fichero con varias sentencias con líneas en blanco entre ellas para separarlas las elimina todas.
+
 
 # sqlparse
 
