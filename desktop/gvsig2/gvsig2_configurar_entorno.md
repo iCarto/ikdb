@@ -1,6 +1,6 @@
 # Creación del entorno.
 
-Para cada versión de gvSIG con la que se trabaja trunk, 2.2, 2.3.1, se crea un directorio que contendrá los repos, y un directorio que contendrá el workspace. 
+Para cada versión de gvSIG con la que se trabaja trunk, 2.2, 2.3.1, se crea un directorio que contendrá los repos, y un directorio que contendrá el workspace.
 
 Se proveen ejemplos para la 2.3.1
 
@@ -55,25 +55,29 @@ cd sixhiara
 git clone git@github.com:iCarto/sixhiara.git && cd sixhiara && git checkout gvsig2
 ```
 
-## Configurar workspace
+## Configurar workspace para Eclipse
 
-Se crea un workspace nuevo desde eclipse, por ejemplo: workspace-gvsig-desktop2.3.1-2501
+Se crea un workspace nuevo desde eclipse, por ejemplo: `workspace-gvsig-desktop2.3.1-2501`
 
 Para cada repo (en realidad es recursivo, si se hace para un directorio pilla los subdirectorios, pero yo prefiero hacerlo uno a uno)
 
+```
 File -> Import -> Existing maven projects -> Aceptar todo
+```
 
-En debug configurations se crea una "Remote Java Aplication":
-* Nombre: Remote gvSIG
-* Project: org.gvsig.andami
-* Connection: Socket Attach
-* Host: localhost
-* Port: 8765
+Usaremos una jdk 8 pero compilando para la 7. La versión que viene en la portable es la 8 pero muchos plugins están marcados como compatibles con la 7 así que esto es la forma más segura de trabajar.
+
+```
+Preferences -> Installed JREs -> Seleccionamos una jdk 1.8 por defecto
+Preferences -> Compiler -> 1.7 y "Use default compliance settings"
+```
+
+En el documento `gvsig2_debug.md` se indica la configuración para debug.
 
 ## Compilar
 
-* El documento org.gvsig.desktop-2.0.157/maven-howto.rst da algunas pistas sobre como usar maven para compilar gvSIG
-* La primera vez que se hace el mvn, se crea el fichero `~/.gvsig-devel.properties`, con una línea similar a `gvsig.product.folder.path=/home/fpuga/development/gvsig-desktop2.3.1-2501/org.gvsig.desktop/target/product` que da la ruta absoluta a donde se van a meter los binarios compilados. Si se cambia el entorno hay que borrar ese fichero o cambiar la ruta.
+-   El documento org.gvsig.desktop-2.0.157/maven-howto.rst da algunas pistas sobre como usar maven para compilar gvSIG
+-   La primera vez que se hace el mvn, se crea el fichero `~/.gvsig-devel.properties`, con una línea similar a `gvsig.product.folder.path=/home/fpuga/development/gvsig-desktop2.3.1-2501/org.gvsig.desktop/target/product` que da la ruta absoluta a donde se van a meter los binarios compilados. Si se cambia el entorno hay que borrar ese fichero o cambiar la ruta.
 
 Para cada repo descargado (empezando por org.gvsig.desktop-2.0.157) hay que ejecutar:
 
@@ -85,6 +89,12 @@ Esto tarda bastante la primera vez. Se descarga internet y suelen petar cosas.
 
 Cada vez que se haga un cambio, hay que compilar el repo(s) que toquen con ese comando, o desde eclipse.
 
+**Nota:** Como el comando es largo y difícil de recordar resulta conveniente crear un alias en `.bashrc`
+
+```
+alias gvsigmvn='mvn -Danimal.sniffer.skip=true -Dsource.skip=true -Dmaven.javadoc.skip=true -Dmaven.test.skip=true -DskipTests -Dgvsig.skip.downloadPluginTemplates=true install'
+```
+
 ## Aplicar parches
 
 En la versión 2.3.1-2501 hay varios parches reportados. Pero es necesario aplicarlos al workspace antes de poder trabajar. En `es.icarto.gvsig.sixhiara/portable/common/patches` están los jar compilados. Lo más fácil es sobreescribir los jar originales con estos ya compilados (y reaplicar cada vez que haya un cambio)
@@ -95,21 +105,11 @@ bash apply_patches SVN_PATH/target/product
 
 En `es.icarto.gvsig.sixhiara/portable/common/patches/modified_files` están los ficheros java modificados, habría que sobreescribir los originales. Ver fichero de `notas.txt` en ese directorio. No se han generado diffs.
 
-## Ejecutar y debug
-
-```
-cd gvsig-desktop2.3.1-2501/org.gvsig.desktop/target/product
-./gvSIG.sh --debug --pause
-```
-
-Esto arranca gvSIG que hace unas cosas y se queda parado. Luego se va a eclipse y se lanza el "Remote gvSIG". De este modo quedan conectados.
-
-
 ## Algunos problemas comunes:
 
 > symbol gpgrt_lock_lock version GPG_ERROR_1.0 not defined in file libgpg-error.so.0
 
-Puede ser debido a que esta librería que viene dentrod e gvSIG y que es antigua no se lleve bien con las versiones de sistemas modernos (ie: Ubuntu 18.04). La solución puede ser eliminarla.
+Puede ser debido a que esta librería que viene dentro de gvSIG y que es antigua no se lleve bien con las versiones de sistemas modernos (ie: Ubuntu 18.04). La solución puede ser eliminarla.
 
 ```
 cd gvsig-desktop2.3.1-2501/org.gvsig.desktop/target/product
@@ -117,5 +117,3 @@ find -iname 'libgpg-error.so.0'
 mv ./gvSIG/extensiones/org.gvsig.gdal.app.mainplugin/gdal/libgpg-error.so.0 /tmp/
 ./gvSIG.sh
 ```
-
-

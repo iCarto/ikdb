@@ -151,3 +151,29 @@ y el config.xml
 			<tool-bar name="NavTable" position="133">
 				<action-tool name="navtable" />
 			</tool-bar>
+			
+			
+
+# Proyecciones	
+			
+La parte de CRS implementa interfaces muy parecidas.
+
+```
+// Default CRS
+MapContextLocator.getMapContextManager().getDefaultCRS()
+
+
+import org.gvsig.fmap.crs.CRSFactory;
+import org.cresques.cts.IProjection;
+
+IProjection epsg4326 = CRSFactory.getCRS("EPSG:4326")
+IProjection epsg25829 = CRSFactory.getCRS("EPSG:25829")
+
+
+if (layer.getCoordTrans() != null) {
+    geometry.reProject(layer.getCoordTrans());
+}
+			
+
+mapControl.getMapContext().setProjection(CRSFactory.getCRS("EPSG:23030"));
+```
