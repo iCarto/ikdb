@@ -45,7 +45,12 @@ formatOnSaveOptions:
         "json}"
       ]
   isDisabledIfNoConfigFile: true  // Si no es nuestra configuración y nuestra versión no lo hacemos automático. Se puede lanzar a mano
-  isDisabledIfNotInPackageJson: true // Si no es nuestra configuración y nuestra versión no lo hacemos automático. Se puede lanzar a mano
+
+  // Parece buena idea ponerlo a true, de modo que si no es nuestra configuración y nuestra versiónno formatee automático
+  // Pero en una estructura tipo project/package.json (con cosas generales) y project/web/package.json con especificas y
+  // sin prettier no funcionaría. Con dejar el de la configuración es suficiente
+  isDisabledIfNotInPackageJson: false
+
   showInStatusBar: true  // Para que sea fácil de deshabilitar si no se quiere para un determinado fichero
   respectEslintignore: false  // No usamos ficheros de ignore específicos para herramientas
   ignoreNodeModules: false
