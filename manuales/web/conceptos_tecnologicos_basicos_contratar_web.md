@@ -4,8 +4,6 @@ A la hora de implementar (o contratar la implementación) de una página web es 
 
 Este documento está enfocado sobre todo a entidades con pocos recursos o con personal sin altas capacidades tecnológicas. Este documento no pretende ser "preciso" o "correcto" desde un punto de vista "informático", si no aportar una visión de alto nivel útil para quien realice la contratación. Se ha escrito a partir de experiencias reales que han sucedido a clientes y contrapartes.
 
-**Aviso**. En este documento se mencionan proveedores, servicios y precios. iCarto no recomienda ni deja de recomendar a estos proveedores. Los precios se proporcionan sólo como referencia y pueden variar.
-
 **Ìndice**
 
 -   Tipos de páginas web. Donde se intentan explicar algunas opciones tecnológicas de como se puede implementar una web.
@@ -13,8 +11,10 @@ Este documento está enfocado sobre todo a entidades con pocos recursos o con pe
 -   Hosting. Donde y como se puede alojar una web.
 -   Cuanto cuesta hacer una web. Orientación sobre coste y tiempos de crear una web.
 -   Contenido de la página
--   Recomendación.
 -   Otras consideraciones.
+-   Checklist. De aspectos que deben contemplar el contrato, TdR o a fijarse a la entrega.
+
+**Aviso**. En este documento se mencionan proveedores, servicios y precios. iCarto no recomienda ni deja de recomendar a estos proveedores. Los precios se proporcionan sólo como referencia y pueden variar.
 
 ## Tipos de páginas web
 
