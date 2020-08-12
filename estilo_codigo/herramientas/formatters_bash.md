@@ -63,7 +63,20 @@ Tiene soporte para pre-commit en el propio repo. Soporte para Atom a través de 
 
 # Configuración iCarto
 
-En iCarto usamos _shfmt_ con las opciones: `-w -l -i 4 -bn -sr -ci`. Se lanza en _pre-commit_ en un hook local. El ejecutable lo mantiene cada persona del equipo como quiere pero la recomendación es descargar el binario y poner el `$HOME/bin/shfmt`
+En iCarto usamos _shfmt_ con las opciones: `-w -l -i 4 -bn -sr -ci`. Se lanza en _pre-commit_ en un hook local. El ejecutable lo mantiene cada persona del equipo como quiere pero la recomendación es descargar el binario y ponerlo en `${HOME}/bin/shfmt`. El directorio `${HOME}/bin` no suele existir por lo que habrá que crearlo, pero en `~/.profile` se carga habitualmente automáticamente en el PATH.
+
+```
+VERSION="2.6.4"
+url="https://github.com/mvdan/sh/releases/download/v${VERSION}/shfmt_v${VERSION}_linux_amd64"
+# url="https://github.com/mvdan/sh/releases/download/v${VERSION}/shfmt_v${VERSION}_darwin_amd64"
+
+mkdir -p "${HOME}/bin/"
+
+curl "${url}" --create-dirs -o "${HOME}/bin/shfmt" --max-redirs 5 --location --silent --show-error
+chmod u+x ${HOME}/bin/shfmt
+
+shfmt --version
+```
 
 Incluimos un script en `package.json` con como se ejecutaría para todo el repositorio: `npm run pretty:bash`
 
