@@ -21,7 +21,7 @@ autopep8 --in-place --recursive **/*.py  # Selecciona todos los .py excepto los 
 autopep8 --in-place --recursive *.py  # Selecciona los .py del directorio actual
 ```
 
-Por defecto no intenta corregir, todas las situaciones si no sólo algunas. La configuración por defecto es bastante segura, en caso de querer que sea más agresivo conviene consultar la documentación. En caso de pasar la herramienta sobre un proyecto legacy, se puede pasar la herramienta una vez en modo no agresivo, hacer commit para poder ver los cambios de la siguiente pasada, seleccionar más opciones `autopep8 --in-place --recursive --select E,W .`, volver a hacer commit e iterar hasta usar 
+Por defecto no intenta corregir, todas las situaciones si no sólo algunas. La configuración por defecto es bastante segura, en caso de querer que sea más agresivo conviene consultar la documentación. En caso de pasar la herramienta sobre un proyecto legacy, se puede pasar la herramienta una vez en modo no agresivo, hacer commit para poder ver los cambios de la siguiente pasada, seleccionar más opciones `autopep8 --in-place --recursive --select E,W .`, volver a hacer commit e iterar hasta usar
 
 ```bash
 autopep8 --in-place --recursive --select E,F,W,C --aggressive --aggressive --experimental --max-line-length=119 .
@@ -37,7 +37,7 @@ El otro caso en el que esta herramienta tiene sentido es como un [beautifier](ht
 
 La descripción de [yapf](https://github.com/google/yapf) es muy clara en cuanto a su objetivo:
 
-> Most of the current formatters for Python e.g., autopep8,  are made to remove lint errors from code.
+> Most of the current formatters for Python e.g., autopep8, are made to remove lint errors from code.
 > This has some obvious limitations. For instance, code that conforms to the PEP 8 guidelines may
 > not be reformatted. But it doesn't mean that the code looks good.
 >
@@ -108,7 +108,7 @@ Después de jugar un poco, queda claro que encontrar la combinación "ideal" es 
     split_arguments_when_comma_terminated = true
     dedent_closing_brackets = true
 
-    # en este caso es con la idea de que salte E124 y tocar las otras opciones para 
+    # en este caso es con la idea de que salte E124 y tocar las otras opciones para
     # que en realidad nunca se de.
     align_closing_bracket_with_visual_indent = false
 
@@ -125,7 +125,7 @@ Después de jugar un poco, queda claro que encontrar la combinación "ideal" es 
 
 [black](https://github.com/python/black) es un formateador de código opinativo. Sus únicas opciones son el máximo de línea y si debe convertir todas las quotes a dobles o no debe hacer esa conversión. El estilo de código que propone es compatible con PEP8 tomando decisiones más "estrictas" en los puntos abiertos del PEP.
 
-A pesar de que puede formatear código de python 2.7, sólo corre sobre la 3.6+ y es capaz de lidiar con Python tipado, f-strings, ... 
+A pesar de que puede formatear código de python 2.7, sólo corre sobre la 3.6+ y es capaz de lidiar con Python tipado, f-strings, ...
 
 Tiene plugins para la mayoría de editores, soporte para [Language Server Protocol](https://langserver.org/)
 
@@ -135,9 +135,7 @@ Lo mejor de `black` es que toma las decisiones por ti, y es el formateador más 
 
 ## Instalación y configuración
 
-`black` requiere Python 3.6+ para correr. Si el proyecto está en esa versión de Python lo mejor es añadirlo a `requirements_dev.txt` y ejecutarlo dentro de un `virtualenv`.
-
-Si el proyecto está en la 2.7 nuestra recomendación es instalarlo a nivel usuario `pip3 install --user black`. En iCarto proporcionamos un `requirements_dev_icarto.txt` a instalar con `pip3 install --user -r requirements_dev_icarto.txt` para simplificar el proceso de crear un entorno.
+`black` requiere Python 3.6+ para correr. Si el proyecto está en esa versión de Python lo mejor es añadirlo a `requirements-dev.txt` y ejecutarlo dentro de un `virtualenv`.
 
 Se puede configurar a través de un fichero [pyproject.toml](https://www.python.org/dev/peps/pep-0518/).
 
@@ -197,9 +195,7 @@ que modifica los ficheros .py "in place" de forma recursiva.
 
 ## Instalación y configuración
 
-Si el proyecto está en esa versión de Python lo mejor es añadirlo a `requirements_dev.txt` y ejecutarlo dentro de un `virtualenv`.
-
-Si el proyecto está en la 2.7 nuestra recomendación es instalarlo a nivel usuario `pip3 install --user isort`. En iCarto proporcionamos un `requirements_dev_icarto.txt` a instalar con `pip3 install --user -r requirements_dev_icarto.txt` para simplificar el proceso de crear un entorno.
+Si el proyecto está en esa versión de Python lo mejor es añadirlo a `requirements-dev.txt` y ejecutarlo dentro de un `virtualenv`.
 
 Se puede configurar a través de un fichero [pyproject.toml](https://www.python.org/dev/peps/pep-0518/).
 
@@ -215,10 +211,10 @@ Se puede configurar a través de un fichero [pyproject.toml](https://www.python.
     filter_files = true # No documentado. Fuerza que se cumpla skip y skip_glob aunque se le pase el fichero por línea de parámetros. Útil para hooks
     skip_glob = ["*.egg", "*.egg-info", "__pycache__", "build/", "node_modules"] # Ajustar en cada proyecto
     combine_as_imports = false # Revisar
-    known_third_party = ["bcrypt", "pyramid", "sqlalchemy", "geoalchemy2", "django"]
+    known_third_party = ["bcrypt", "pyramid", "sqlalchemy", "geoalchemy2", "django", "requests"]
     known_first_party = ["mypackage"] # Ajustar en cada proyecto
 
-Para determinar si un paquete es `third party` o `first party` parece ser que isort lo importa realmente, esto puede dar lugar a resultados extraños [#725](https://github.com/timothycrosley/isort/issues/725), [#704](https://github.com/timothycrosley/isort/issues/704), [#498](https://github.com/timothycrosley/isort/issues/498), sobre todo en entornos de `ci`. Lo más sencillo seguramente es añadir a mano paquetes a 
+Para determinar si un paquete es `third party` o `first party` parece ser que isort lo importa realmente, esto puede dar lugar a resultados extraños [#725](https://github.com/timothycrosley/isort/issues/725), [#704](https://github.com/timothycrosley/isort/issues/704), [#498](https://github.com/timothycrosley/isort/issues/498), sobre todo en entornos de `ci`. Lo más sencillo seguramente es añadir a mano paquetes a
 `known_third_party` y `known_first_party` cuando se detecta un problema. La herramienta [seed-isort-config](https://github.com/asottile/seed-isort-config) podría usarse para modificar el valor de estas opciones, pero tampoco se ha comportado a prueba de balas en las pruebas realizadas así que no la usamos.
 
 **Algunos problemas**
@@ -229,7 +225,7 @@ Para determinar si un paquete es `third party` o `first party` parece ser que is
 
 En iCarto usamos black + isort. Estás herramientas se lanzan con [pre-commit](https://pre-commit.com/) y se configuran en `pyproyect.toml`. En cada repositorio se configura el `target-version` de black y los `known_third_party`, `known_first_party` de isort.
 
-Incluimos un script en `package.json` con como se lanzaría para ejecutarlos sobre todo el repositorio: `npm run-script pretty:python`
+Incluimos un script en `package.json` con como se lanzaría para ejecutarlos sobre todo el repositorio: `npm run pretty:python`
 
 ```json
 "scripts": {

@@ -12,12 +12,14 @@ module.exports = {
         "string-quotes": ["double", {avoidEscape: true}],
         "font-family-name-quotes": "always-unless-keyword",
         "function-url-quotes": "always",
+        "string-quotes": "double",
         "selector-attribute-quotes": "always",
 
         "no-descending-specificity": null,
 
         "function-calc-no-unspaced-operator": true,
         "selector-pseudo-class-parentheses-space-inside": "never",
+        "comment-empty-line-before": "never",
     },
 
     // https://stylelint.io/user-guide/configuration/#ignorefiles

@@ -2,6 +2,7 @@
     "name": "icarto-scaffolding",
     "version": "1.0.0",
     "description": "Formatter scaffolding for iCarto projects",
+    "private": true,
     "author": "iCarto <info@icarto.es>",
     "license": "AGPL-3.0",
     "homepage": "https://gitlab.com/icarto/ikdb",
@@ -9,7 +10,6 @@
         "type": "git",
         "url": "git+ssh://git@gitlab.com:icarto/ikdb.git"
     },
-    "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "pretty:python": "black . && isort -rc .",

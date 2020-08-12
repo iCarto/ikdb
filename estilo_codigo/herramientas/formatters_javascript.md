@@ -12,7 +12,6 @@ Las principales son:
     -   <https://standardjs.com/>
 -   [Prettier](https://github.com/prettier/prettier). Un formatter opinativo. De lejos la herramienta de este tipo más popular para JavaScript.
 
-
 ## Prettier
 
 [Prettier](https://github.com/prettier/prettier) es el formatter más popular de JavaScript. Es opinativo con lo que hay, relativamente, pocas opciones de configuración. El resultado es bastante bueno sin necesidad de tocar nada. Y cuando queda bastante mal, generalmente es que necesite un refactor.
@@ -109,7 +108,7 @@ En la misma base de código JS Beautify tardó 16s, mientras que Prettier tardó
 
 En iCarto usamos Prettier. Se lanza con [pre-commit](https://pre-commit.com/) y se configuran en `prettier.config.js`.
 
-Incluimos un script en `package.json` con como se ejecutaría para todo el repositorio: `npm run-script pretty:js`
+Incluimos un script en `package.json` con como se ejecutaría para todo el repositorio: `npm run pretty:js`
 
 ```json
 "scripts": {

@@ -12,7 +12,7 @@ node_modules/
 package-lock.json
 
 
-## Unit test / coverage reports
+# Unit test / coverage reports
 .coverage
 
 
@@ -21,6 +21,10 @@ package-lock.json
 .vscode
 .vagrant
 *~
+ubuntu-*-cloudimg-console.log
+
+# Scripts
+.ipynb_checkpoints
 
 
 # Project

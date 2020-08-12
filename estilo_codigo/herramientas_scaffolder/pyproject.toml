@@ -36,5 +36,5 @@ use_parentheses = true
 filter_files = true
 skip_glob = ["*.egg", "*.egg-info", "__pycache__", "build/", "node_modules"]
 combine_as_imports = false # Revisar
-known_third_party = ["bcrypt", "pyramid", "sqlalchemy", "geoalchemy2", "django", "dateutil"]
+known_third_party = ["bcrypt", "pyramid", "sqlalchemy", "geoalchemy2", "django", "dateutil", "requests"]
 known_first_party = ["utentes", "users"] # Ajustar en cada proyecto

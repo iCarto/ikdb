@@ -3,7 +3,7 @@
 Los formateadores principales de JavaScript (ver formatters_javascript.md) suelen hacer un buen trabajo formateando CSS y derivados.
 
 -   [Prettier](https://github.com/prettier/prettier)
--   [JS Beautifier](https://github.com/beautify-web/js-beautify). 
+-   [JS Beautifier](https://github.com/beautify-web/js-beautify).
 
 Y también los hay específicos
 
@@ -85,19 +85,17 @@ Usa _cosmiconfig_ para la configuración. En iCarto tratamos de usar una configu
 module.exports = {
     defaultSeverity: "error", // Valor por defecto. Útil para cambiarlo a warning rápido durante pruebas.
 
-    plugins: [
-	    "stylelint-order",
-    ],
-    
+    plugins: ["stylelint-order"],
+
     extends: "stylelint-config-standard",
-    
+
     rules: {
-	    "order/properties-alphabetical-order": true,
-        indentation: [4, { baseIndentLevel: 1 }],
-	    linebreaks: "unix",
-	    "max-line-length": 88,
-	    "no-empty-first-line": true,
-	    "string-quotes": ["double", { "avoidEscape" : true }],
+        "order/properties-alphabetical-order": true,
+        indentation: [4, {baseIndentLevel: 1}],
+        linebreaks: "unix",
+        "max-line-length": 88,
+        "no-empty-first-line": true,
+        "string-quotes": ["double", {avoidEscape: true}],
         "font-family-name-quotes": "always-unless-keyword",
         "function-url-quotes": "always",
         "selector-attribute-quotes": "always",
@@ -112,7 +110,7 @@ module.exports = {
 	    "static/vendor",
     ],
     */
-}
+};
 ```
 
 # Herramientas descartadas o con poco mantenimiento
@@ -136,7 +134,7 @@ Si se necesita configurar más o menos a medida el css que sale tanto _JS Beauti
 
 En iCarto usamos _stylelint_ . Se lanza con [pre-commit](https://pre-commit.com/) y se configuran en `stylelint.config.js`.
 
-Incluimos un script en `package.json` con como se ejecutaría para todo el repositorio: `npm run-script pretty:css`
+Incluimos un script en `package.json` con como se ejecutaría para todo el repositorio: `npm run pretty:css`
 
 ```json
 "scripts": {
