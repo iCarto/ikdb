@@ -52,3 +52,16 @@ repos:
             language: system
             types: [shell]
             verbose: true
+
+          - id: shellcheck
+            name: shellcheck
+            entry: shellcheck
+            types: [shell]
+            verbose: true
+
+          - id: bandit
+            name: bandit
+            entry: bandit
+            args: [-c, .bandit.yaml]
+            types: [python]
+            verbose: true
