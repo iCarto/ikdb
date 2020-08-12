@@ -51,7 +51,7 @@ El paquete de los repositorios incluido el PPA de PostgreSQL está desactualizad
 
 Otros requisitos son `dbix-safe`, que si está actualizado en los repositorios así que lo podemos instalar por paquete y el lenguaje `plperl` correspondiente a la versión de PostgreSQL que tengamos instalada.
 
-```
+```shell
 # si estaba instalado de antes
 bucardo stop
 apt-get remove --purge bucardo
@@ -74,7 +74,7 @@ bucardo --version # bucardo version 5.6.0
 
 Si estamos actualizando tras instalar el software debemos actualizar la configuración. Esto sólo es válido para actualizaciones de minor. No es posible actualizar de la versión 4.x a la 5.x de este modo (hay que recrear toda la instalación)
 
-```
+```shell
 bucardo stop
 bucardo upgrade
 bucardo validate all
@@ -100,7 +100,7 @@ Consideraciones (para este ejemplo):
 
 El proceso de crear la configuración de replicación sería similar al siguiente:
 
-```
+```shell
 # Bucardo almacena un fichero en el directorio indicado por `--piddir` o
 # `bucardo set piddir=ruta`. Por defecto se usa `/var/run/bucardo` que en la mayoría
 # de distribuciones no es persistente, por lo que se debe crear un servicio que haga
@@ -176,18 +176,18 @@ bucardo status "${B_SYNC}"
 # sólo para asegurarnos que nada se rompe al hacer kick
 bucardo kick "${B_SYNC}"
 tail -50 /var/log/bucardo/log.bucardo
+```
 
 # Referencias:
 
-* [Presentación sobre Bucardo 5](https://bucardo.org/slides/b5_multi_master/)
-* [Ejemplo de configuración de multi-active en Bucardo 4](https://beastiebytes.com/postgresql-master-master-replication-with-bucardo.html). Incluye un método sencillo para generar secuencias distintas.
-* [Using Bucardo 5.3 to Migrate a Live PostgreSQL Database](https://www.compose.com/articles/using-bucardo-5-3-to-migrate-a-live-postgresql-database/)
-* [Bootstrapping Bucardo Master/Master Replication](https://justatheory.com/2013/02/bootstrap-bucardo-mulitmaster/). Un buen artítulo de  David Wheeler
-* [Un Gist con un ejemplo de instalación](https://gist.github.com/Leen15/da42bd23b363867e14a378d824f2064e)
-* [Bucardo replication workarounds for extremely large Postgres updates](https://www.endpoint.com/blog/2016/05/31/bucardo-replication-workarounds-for)
-* [Conflict handling with Bucardo and multiple data sources](https://www.endpoint.com/blog/2014/07/24/postgresql-conflict-handling-with)
-* [Bucardo replication to other tables with customname](https://www.endpoint.com/blog/2011/09/05/bucardo-postgresql-replication-to-other)
-* [Postgres session_replication role - Bucardo and Slony’s powerful ally](https://www.endpoint.com/blog/2015/01/28/postgres-sessionreplication-role)
-* [Version 5 of Bucardo database replication system](https://www.endpoint.com/blog/2014/06/23/bucardo-5-multimaster-postgres-released)
-* [Bucardo Replication Update is Slow?](https://saifulmuhajir.web.id/postgresql-bucardo-replication-update-is-slow/)
-```
+-   [Presentación sobre Bucardo 5](https://bucardo.org/slides/b5_multi_master/)
+-   [Ejemplo de configuración de multi-active en Bucardo 4](https://beastiebytes.com/postgresql-master-master-replication-with-bucardo.html). Incluye un método sencillo para generar secuencias distintas.
+-   [Using Bucardo 5.3 to Migrate a Live PostgreSQL Database](https://www.compose.com/articles/using-bucardo-5-3-to-migrate-a-live-postgresql-database/)
+-   [Bootstrapping Bucardo Master/Master Replication](https://justatheory.com/2013/02/bootstrap-bucardo-mulitmaster/). Un buen artítulo de David Wheeler
+-   [Un Gist con un ejemplo de instalación](https://gist.github.com/Leen15/da42bd23b363867e14a378d824f2064e)
+-   [Bucardo replication workarounds for extremely large Postgres updates](https://www.endpoint.com/blog/2016/05/31/bucardo-replication-workarounds-for)
+-   [Conflict handling with Bucardo and multiple data sources](https://www.endpoint.com/blog/2014/07/24/postgresql-conflict-handling-with)
+-   [Bucardo replication to other tables with customname](https://www.endpoint.com/blog/2011/09/05/bucardo-postgresql-replication-to-other)
+-   [Postgres session_replication role - Bucardo and Slony’s powerful ally](https://www.endpoint.com/blog/2015/01/28/postgres-sessionreplication-role)
+-   [Version 5 of Bucardo database replication system](https://www.endpoint.com/blog/2014/06/23/bucardo-5-multimaster-postgres-released)
+-   [Bucardo Replication Update is Slow?](https://saifulmuhajir.web.id/postgresql-bucardo-replication-update-is-slow/)

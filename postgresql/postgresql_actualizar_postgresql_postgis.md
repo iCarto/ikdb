@@ -28,7 +28,7 @@ Antes de cualquier actualización mayor de PostgreSQL/PostGIS o el sistema opera
 
 -   Si se usa `pg_dump` o `pg_upgrade` para actualizar debe usarse la versión más reciente de los binarios. Una forma de asegurarse de ello es usar las rutas absolutas a los ejecutables. Al menos en Ubuntu, después de instalar una nueva versión, puede suceder que algunos binarios como `pg_dump` estén apuntando a la versión antigua en lugar de a la nueva. Si tenemos scripts que no usen las rutas absolutas, podemos fijar la versión a través de [pg_wrapper](http://manpages.ubuntu.com/manpages/trusty/man1/pg_wrapper.1.html), o fijar la variable de entorno `PGCLUSTER`
 
-```
+```shell
 $ pg_dump --version
 pg_dump (PostgreSQL) 9.1.24
 
@@ -76,7 +76,7 @@ La "mejor" opción dependerá de:
 
 La documentación oficial de PostGIS describe como [realizar una actualización](http://postgis.net/docs/postgis_installation.html#upgrading), _soft_ cuando actualizamos el _minor_ o _hard_ cuando actualizamos el _major_. En versiones menores a PostgreSQL 9.1 y PostGIS 1.5, puede ser un poco más complicado que lo descrito pero obviando ese caso se puede simplificar a hacer un dump y un restore con un script que viene en la distribución de PostGIS:
 
-```
+```shell
 pg_dump -h localhost -p 5432 -U postgres -Fc -b -v -f "/somepath/olddb.backup" olddb
 perl utils/postgis_restore.pl "/somepath/olddb.backup" | psql -h localhost -p 5432 -U postgres newdb 2> errors.txt
 ```
@@ -96,7 +96,7 @@ El anterior es un proceso sencillo y seguro pero hay artículos describiendo otr
 
 -   Tras actualizar hay una serie de operaciones que se pueden realizar como [cargar en memoria algunos datos](https://www.postgresql.org/docs/11/pgprewarm.html). Y especialmente "analizar" el nuevo clúster. [Si se usa pg_upgrade](https://www.postgresql.org/docs/11/pgprewarm.html) ya genera los scripts adecuados. En algunos casos [este script puede no ser lo óptimo](https://www.endpoint.com/blog/2016/12/07/postgres-statistics-and-pain-of-analyze). En caso de tener que hacerlo a mano:
 
-```
+```shell
 # En >=9.4
 vacuumdb --all --analyze-in-stages
 
@@ -114,7 +114,7 @@ reindexdb --all
 
 -   Eliminar el clúster viejo cuando la instalación haya sido probada. Esto implica [eliminar los binarios](https://stackoverflow.com/questions/2748607/how-to-thoroughly-purge-and-reinstall-postgresql-on-ubuntu) y [borrar de disco](https://serverfault.com/questions/394257/i-think-i-have-multiple-postgresql-servers-installed-how-do-i-identify-and-dele) logs, datos, configuraciones, ...
 
-```
+```shell
 apt-get purge postgresql-${OLD_PG_VERSION}
 rm -rf /var/lib/postgresq/${OLD_PG_VERSION}
 rm -rf /etc/postgresql/${OLD_PG_VERSION}

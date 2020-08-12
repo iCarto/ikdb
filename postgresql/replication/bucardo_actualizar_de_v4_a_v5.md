@@ -18,7 +18,7 @@ El proceso resumido consiste en:
 
 Revisamos y salvamos la configuración de replicación actual. Esto es un ejemplo para casos donde no haya estrategias a medida:
 
-```
+```shell
 # Configuración general de bucardo
 bucardo_ctl show all  # select * from bucardo.bucardo_config order by setting;
 
@@ -36,7 +36,7 @@ bucardo_ctl list table  # select * from bucardo.goat;
 
 Si se tiene un sólo `sync` y todas las tablas configuradas participan de ese `sync` probablemente lo más sencillo sea permitir que cuando se configure de nuevo Bucardo cree los valores por defecto de `db_group` y `herd`. Por lo que sólo hay que guardar, los valores de `db`, `table` y configuración:
 
-```
+```shell
 bucardo_ctrl show all > ~/bucarco-bck/bucardo.config.txt
 bucardo_ctl list db > ~/bucarco-bck/bucardo.db.txt
 psql -XtA -h localhost -p 5432 -U postgres -d bucardo -c "SELECT string_agg(schemaname || '.' || tablename, ' ') FROM bucardo.goat ;" > ~/bucarco-bck/bucardo.table.sql.txt
@@ -48,7 +48,7 @@ Hacemos un `kick` y comprobamos que se ha realizado para asegurarnos de que no q
 
 Desinstalamos los binarios de bucardo y configuraciones asociadas en disco. Aquí se proporcionan algunas de las rutas de ejemplo
 
-```
+```shell
 sudo apt-get remove --purge bucardo
 mv /etc/bucardorc ~/bucarco-bck/
 mv /var/log/bucardo ~/bucarco-bck/log_bucardo
@@ -67,7 +67,7 @@ Para empezar una configuración limpia debemos eliminar:
 -   Los esquemas bucardo de las bases de datos replicados
 -   Los triggers de las tablas replicadas
 
-```
+```shell
 dropdb -h localhost -p 5432 -U postgres bucardo
 
 # Para cada db replicada
@@ -87,7 +87,7 @@ Si en el cluster de bucardo además de la base de datos "en producción" tenemos
 
 Generalmente esta es una alternativa válida
 
-```
+```shell
 dropdb --if-exists -h localhost -p 5432 -U postgres old_bucardo
 psql -h localhost -p 5432 -U postgres -d postgres -c "ALTER DATABASE bucardo RENAME TO old_bucardo"
 
@@ -107,7 +107,7 @@ En el documento genérico sobre bucardo, `bucardo.md` se explica como instalar y
 
 Tras el `bucardo install`, realizar configuración general y añadir las bases de datos con `bucardo add db` en lugar de añadir las tablas a mano podemos partir del fichero que guardamos anteriormente `bucardo.table.sql.txt`:
 
-```
+```shell
 B_DB_1=name1
 B_DB_2=name2
 DB_NAME=actual_name
