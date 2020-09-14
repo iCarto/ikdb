@@ -1,6 +1,6 @@
 # Actualizar de Bucardo 4.x a la versión 5.x
 
-De la versión 4 a la 5 hay cambios substancias que hacen que el proceso de actualización no sea limpio. Deben instalarse los nuevos binarios y recrear por completo toda la estructura. En este artículo presentamos algunos consejos de como hacerlo.
+De la versión 4 a la 5 hay cambios substanciales que hacen que el proceso de actualización no sea limpio. Deben instalarse los nuevos binarios y recrear por completo toda la estructura. En este artículo presentamos algunos consejos de como hacerlo.
 
 Asumimos que un _downtime_ es aceptable, para simplificar las ideas básicas de como proceder con la actualización.
 
