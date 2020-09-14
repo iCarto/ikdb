@@ -11,7 +11,7 @@ license: CC BY-SA 4.0
 
 Este documento describe algunas de las opciones disponibles para configurar [source source replication](https://en.wikipedia.org/wiki/Multi-master_replication) en PostgreSQL. A este concepto también se le denomina "master master", "multi active", "source source", "active active", ...
 
-En este documento nos referimos unicamente a un caso de uso de la `replicación multi-source`: dos o más servidores PostgreSQL que se comunican entre sí, para que las operaciones de escritura que se hagan en uno de los servidores se hagan también en el otro. Fundamentalmente esto responde a la situación de organizaciones con varias "oficinas", donde la comunicación entre las oficinas no es demasiado rápida y se requiere ubicar un servidor en cada de las "redes/oficinas" que se mantengan sincronizados. A esto se lo denomina a veces "geographically distributed problem".
+En este documento nos referimos unicamente a un caso de uso de la `replicación multi-source`: dos o más servidores PostgreSQL que se comunican entre sí, para que las operaciones de escritura que se hagan en uno de los servidores se hagan también en el otro. Fundamentalmente esto responde a la situación de organizaciones con varias "oficinas", donde la comunicación entre las mismas no es demasiado rápida y se requiere ubicar un servidor en cada de las "redes/oficinas" que se mantengan sincronizados. A esto se lo denomina a veces "geographically distributed problem".
 
 No contemplamos casos de uso más relacionados con Alta Disponibilidad, Balanceo de Carga o Recuperación de Desastres. Asimismo sacrificamos algo de precisión técnica, a cambio de hacer el texto más comprensible.
 
@@ -20,11 +20,11 @@ Para la problemática que queremos resolver en este caso hay varias cosas más a
 -   El caso principal es del aplicaciones GIS de Escritorio que se conectarán directamente a uno de los servidores.
 -   No es necesario replicar sentencias DDL o que soporte la sincronización de usuarios. En nuestro caso las migraciones de la base de datos se gestionan durante el despliegue, y los usuarios mediante una interfaz web que se encarga de replicarlos a ambos servidores, asignar los roles, adecuados, ...
 -   Comunicación asíncrona
--   Debe soportarse que alguno de los servidores está off-line y sincronice más tarde.
+-   Debe soportarse que alguno de los servidores esté off-line y sincronice más tarde
 -   Buen funcionamiento en una red lenta
--   Las escrituras son escasas y suelen corresponder a "elementos" distintos, por lo que es poco habitual que se produzca un conflicto y una estrategia _last wins_ es suficiente.
+-   Las escrituras son escasas y suelen corresponder a "elementos" distintos, por lo que es poco habitual que se produzca un conflicto y una estrategia _last wins_ es suficiente
 -   No es necesario sincronizar toda la base de datos si no únicamente algunas tablas.
--   La solución debe ser software libre y gratuita.
+-   La solución debe ser software libre y gratuita
 
 ## Opciones
 

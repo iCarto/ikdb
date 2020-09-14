@@ -12,11 +12,11 @@ El objetivo de este artículo es:
 
 Antes de cualquier actualización mayor de PostgreSQL/PostGIS o el sistema operativo debe realizarse cierta planificación:
 
--   Leer las _release notes_ de [PostgreSQL](https://www.postgresql.org/docs/release/) y de [PostGIS]](http://postgis.net/docs/release_notes.html). Especialmente las secciones que hablan de _incompatibilities_, _breaking changes_ y _migration_. Generalmente no hay problemas graves, pero en ocasiones puede ser necesario modificar el código de aplicación o llevar a cabo pasos adicionales como regenerar los índices. Las webs de [Why upgrade PostgreSQL]((https://why-upgrade.depesz.com) y la de [Bucardo](https://bucardo.org/postgres_all_versions.html) nos da otra forma de ver los cambios.
+-   Leer las _release notes_ de [PostgreSQL](https://www.postgresql.org/docs/release/) y de [PostGIS]](http://postgis.net/docs/release_notes.html). Especialmente las secciones que hablan de _incompatibilities_, _breaking changes_ y _migration_. Generalmente no hay problemas graves, pero en ocasiones puede ser necesario modificar el código de nuestra aplicación o llevar a cabo pasos adicionales como regenerar los índices. Las webs de [Why upgrade PostgreSQL]((https://why-upgrade.depesz.com) y la de [Bucardo](https://bucardo.org/postgres_all_versions.html) nos dan otra forma de ver los cambios.
 
 -   Estudiar la [compatibilidad entre la versión de PostGIS, gdal y PostgreSQL](http://trac.osgeo.org/postgis/wiki/UsersWikiPostgreSQLPostGIS).
 
--   Revisar si se ha modificado a mano `spatial_ref_sys`. Extraer las diferencias, y revisar que cambios es necesario realizar tras la actualización. El script de `postgis_restore.pl`, intenta gestionar las modificaciones en `spatial_ref_sys`, pero depende de que versiones de PostGIS estemos empleando y de como hagamos el dump. Así que es obligatorio revisarlo a mano, cuando no tengamos el proceso muy trabajado.
+-   Revisar si se ha modificado a mano `spatial_ref_sys`. Extraer las diferencias, y revisar que cambios son necesarios realizar tras la actualización. El script de `postgis_restore.pl`, intenta gestionar las modificaciones en `spatial_ref_sys`, pero depende de que versiones de PostGIS estemos empleando y de como hagamos el dump. Así que es obligatorio revisarlo a mano, cuando no tengamos el proceso muy trabajado.
 
 -   Actualizar el sistema operativo cuando PostgreSQL [está instalado](<(https://www.commandprompt.com/blog/upgrading-ubuntu-lts-and-postgresql/)>) puede ser [problemático](https://www.paulox.net/2020/04/24/upgrading-postgresql-from-version-11-to-12-on-ubuntu-20-04-focal-fossa/), sobre todo con [versiones antiguas](https://askubuntu.com/questions/873091/postgresql-fails-to-reinstall-after-upgrading-ubuntu-12-04-to-14-04). Es [recomendable usar](https://www.postgresql.org/download/linux/ubuntu/) el propio [repositorio de PostgreSQL](https://wiki.postgresql.org/wiki/Apt) en lugar del de la distribución para tener un mayor control de las versiones a instalar.
 
@@ -125,4 +125,4 @@ rm /var/log/postgresql/postgresql-${OLD_PG_VERSION}-main.log*
 
 En iCarto, dado que la mayoría de nuestros clusters usan PostGIS, encontramos que la opción más directa y segura cuando actualizamos el servidor es usar un dump y restaurar mediante el script proporcionado por PostGIS.
 
-En el fichero `postgresql_actualizar_postgresql_postgis.sh` proporcionamos un ejemplo de secuencia de actualización. Está hecho para usarse como guía no como script a ejecutar.
+En el fichero `postgresql_actualizar_postgresql_postgis.sh` proporcionamos un ejemplo de secuencia de actualización. Está hecho para usarse como guía, no como script a ejecutar.
