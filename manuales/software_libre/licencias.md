@@ -26,23 +26,23 @@ El objetivo es dar una visión general al mundo de las licencias de software, qu
 
 De forma sencilla podemos decir que una licencia de software es un contrato, que se establece entre la persona o entidad creadora del mismo y quien lo usa. En este contrato se establecen todas las condiciones bajo las que se puede usar dicho software y qué se puede hacer con él y qué no.
 
-No es un contrato al uso en el que las partes firman un mismo documento, sino que es un tipo de contrato que se acepta de forma tácita cuando usamos un determinado software. Normalmente la persona o entidad desarrolladora del mismo habrá establecido las condiciones del contrato en el propio software. En el caso del software libre suelen incluírse a través de ficheros que acompañan al código fuente, en cambio en el caso de software privativo lo habitual es que a la hora de instalar o ejecutar el software por primera vez nos aparezca algún tipo de aviso para que leamos y aceptemos las condiciones de uso, esto es, la licencia o contrato.
+No es un contrato al uso en el que las partes firman un mismo documento, sino que es un tipo de contrato que se acepta de forma tácita cuando usamos un determinado software. Normalmente la persona o entidad desarrolladora del mismo habrá establecido las condiciones del contrato en el propio software. En el caso del software libre suelen incluirse a través de ficheros que acompañan al código fuente, en cambio en el caso de software privativo lo habitual es que a la hora de instalar o ejecutar el software por primera vez nos aparezca algún tipo de aviso para que leamos y aceptemos las condiciones de uso, esto es, la licencia o contrato.
 
 ## Normativa aplicable
 
-Es España, todo lo relativo a las licencias de software se encuentra regulado en la [Ley de Propiedad Intelectual](https://www.boe.es/buscar/act.php?id=BOE-A-1996-8930). Esta ley es de aplicación sobre cualquier *obra literaria, artística o científica* que puede aparecer como **libros, escritos, composiciones musicales, obras, coreografías, obras audiovisuales, esculturas, obras pictóricas, planos, maquetas, mapas, fotografías, programas de ordenador y bases de datos*.
+En España, todo lo relativo a las licencias de software se encuentra regulado en la [Ley de Propiedad Intelectual](https://www.boe.es/buscar/act.php?id=BOE-A-1996-8930). Esta ley es de aplicación sobre cualquier *obra literaria, artística o científica* que puede aparecer como *libros, escritos, composiciones musicales, obras, coreografías, obras audiovisuales, esculturas, obras pictóricas, planos, maquetas, mapas, fotografías, programas de ordenador y bases de datos*.
 
 Sin entrar en detalles técnicos de la ley, sí es importante conocer que los denominados derechos de autor, que regula esta ley, se dividen en derechos morales y derechos patrimoniales. Como normal general la autora de una obra es la poseedora de ambos derechos.
 
--   **Derechos Morales**: Es el derecho de la autora a ser reconocido como creadora de una obra, son irrenunciables y no se pierden nunca.
+-   **Derechos Morales**: Es el derecho de la autora a ser reconocida como creadora de una obra, son irrenunciables y no se pierden nunca.
 
 -   **Derechos Patrimoniales**: Es el derecho a explotar comercialmente una obra y decidir qué se puede hacer con la misma. Estos derechos pueden ser cedidos a terceros y tienen una duración determinada, toda la vida de la autora y hasta 70 años después de su muerte. Es mediante la posesión de estos derechos, a través de los cuales se pueden establecer las licencias.
 
-Ahora que sabemos que existen los derechos patrimoniales y que se pueden ceder a terceros, podemos redefinir mejor que es una licencia de software, diciendo que es una contrato de cesión de derechos. Es el mecanismo a través del cual, la persona o entidade poseedora de los mismos decide que se puede hacer con la obra. Existen diferentes tipos de derechos patrimoniales, y la poseedora de los mismos puede decidir si los cede todos en conjunto, o solo algunos de ellos.
+Ahora que sabemos que existen los derechos patrimoniales y que se pueden ceder a terceros, podemos redefinir mejor que es una licencia de software, diciendo que es un contrato de cesión de derechos. Es el mecanismo a través del cual, la persona o entidad poseedora de los mismos decide que se puede hacer con la obra. Existen diferentes tipos de derechos patrimoniales, y la poseedora de los mismos puede decidir si los cede todos en conjunto, o solo algunos de ellos.
 
 Un ejemplo típico de cesión de derechos patrimoniales es el contrato entre una escritora y una editorial, donde la primera, autora de la obra, cede todos o alguno de los derechos patrimoniales a la editorial para que esta se encargue de la distribución y comercialización de la obra.
 
-Una licencia de software sería pues un caso de contrato de cesión de derechos, donde la autora o en su defecto la poseedora de los mismos, a su vez cede todos o alguno de esos derechos a las usuarias. El hecho de que se cedan más o menos derechos tendrá incidencia directa para denominar al software como libre o privativo. 
+Una licencia de software también sería un caso de contrato de cesión de derechos, donde la autora o en su defecto la poseedora de los mismos, a su vez cede todos o alguno de esos derechos a las usuarias. El hecho de que se cedan más o menos derechos tendrá incidencia directa para denominar al software como libre o privativo. 
 
 ## ¿A quién pertenece el código que hago en iCarto?
 
@@ -52,7 +52,7 @@ La ley establece algunos casos particulares de cesiones tácitas de derechos. Es
 
 El software libre se define como aquel que cumple cuatro libertades: Usar el software para cualquier propósito, poder redistribuirlo, poder modificarlo y poder redistribuir las modificaciones. Ahora que sabemos como funcionan los derechos de autor, podemos decir que esto sería una cesión de todos los derechos patrimoniales. Para llevarlo a cabo, como hemos visto, esto se hace a través de un contrato, que sería la propia licencia de software.
 
-Las licencias de software son contratos estándar, que diferentes organizaciones han creado para facilitar la cesión de derechos por parte de las autoras de software. Todas sirven para ceder los derechos a las usuarias, cumpliendo así con las 4 libertades, pero cada una tiene algunas particularidades.
+Las licencias de software libre son contratos estándar, que diferentes organizaciones han creado para facilitar la cesión de derechos por parte de las autoras de software. Todas sirven para ceder los derechos a las usuarias, cumpliendo así con las 4 libertades, pero cada una tiene algunas particularidades.
 
 ## ¿Qué se debe tener en cuenta a la hora de establecer una licencia?
 
@@ -72,7 +72,7 @@ Como norma general, en iCarto intentamos usar licencias víricas, de manera que 
 
 Así, elegimos la familia de licencias de la [Free Software Foundation](https://www.fsf.org/es/), siempre que nos sea posible, tras el análisis de dependencias, para nuestro software:
 
--   [General Public License](https://www.gnu.org/licenses/gpl-3.0.html), GPL, para las aplicaciones en genaral.
+-   [General Public License](https://www.gnu.org/licenses/gpl-3.0.html), GPL, para las aplicaciones en general.
 -   [Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.html), AGPL, para las aplicaciones web.
 
 Para el resto de material que publicamos, utilizamos las licencias [Creative Commons](https://creativecommons.org), orientadas a publicar de forma libre obras que no sean software. Estas licencias tienen una serie de cláusulas que se pueden añadir a la licencia base. En nuestro caso utilizamos dos de ellas (CC BY-SA):
