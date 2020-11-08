@@ -2,11 +2,11 @@
 
 ## Repositorios
 
-* https://gitlab.com/icarto/siga. Código principal de SIGA. Incluye la mayoría de los plugins para gvSIG, scripts para generar portables y entorno. Lo usaremos también como carpeta para el Workspace
-* https://gitlab.com/icarto-private/icarto-gvsig. Repo que contiene una versión modificada de gvSIG 1.12. Es el repo a usar para trabajar con gvSIG en proyectos iCarto. Los cambios que se hagan en el core de gvSIG en otros proyectos y que sean "comunes" deberían subirse a este repo también.
-* https://gitlab.com/icarto/es.icarto.gvsig.commons. Único plugin que no está incluido directamente dentro de SIGA.
+-   https://gitlab.com/icarto/siga. Código principal de SIGA. Incluye la mayoría de los plugins para gvSIG, scripts para generar portables y entorno. Lo usaremos también como carpeta para el Workspace
+-   https://gitlab.com/icarto-private/icarto-gvsig. Repo que contiene una versión modificada de gvSIG 1.12. Es el repo a usar para trabajar con gvSIG en proyectos iCarto. Los cambios que se hagan en el core de gvSIG en otros proyectos y que sean "comunes" deberían subirse a este repo también.
+-   https://gitlab.com/icarto/es.icarto.gvsig.commons. Único plugin que no está incluido directamente dentro de SIGA.
 
-* `SIGA_FOLDER` y `GVSIG1_FOLDER` se puede setear al valor deseado
+-   `SIGA_FOLDER` y `GVSIG1_FOLDER` se puede setear al valor deseado
 
 ```
 GVSIG1_FOLDER=~/development/gvsig1
@@ -93,6 +93,8 @@ ln -s mod_spatialite.so.7.1.0 mod_spatialite.so.7.1.0.so
 
 
 ## Configurar Eclipse
+
+Versión de eclipse recomendada. [Luna SR2](https://www.eclipse.org/downloads/packages/release/luna/sr2) corriendo sobre una jdk 1.7 de Oracle.
 
 * Nuevo Workspace. "${SIGA_FOLDER}"/siga
 * Importar proyectos. "${SIGA_FOLDER}"/siga

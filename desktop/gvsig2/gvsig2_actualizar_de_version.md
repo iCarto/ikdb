@@ -8,7 +8,7 @@ Se actualiza el número de versión del `parent` en el `pom.xml` del plugin. La 
 
 Con cambios de _minor_ en gvSIG se suele producir _breaking changes_ que hay que identificiar y corregir.
 
-## 2.3.1-2501 -> 2.5.1-3042-rc2
+## 2.3.1-2501 -> 2.5.1-3046-final
 
 Algunos cambios detectados.
 
@@ -100,3 +100,11 @@ feat.get("bar"); // It works!
 **Feature**
 
 La interfaz Feature ha sufrido varios cambios, desapareciendo algunos métodos y apareciendo otros.
+
+**Persistencia**
+
+La carpeta "home/gvSIG" donde van las preferencias ahora es "preferences/gvSIG". Además hay preferencias que se guardan en `plugins-persistence-2_0.xml`, `andami-config.xml` y otras en `preferences/gvSIG/plugins/*/plugin-persistence.dat`
+
+Los .xml tenderán a desaparecer en favor de los .dat pero ahora sigue habiendo cosas duplicadas o que están en los .xml y no en los .dat como el idioma o la vista por defecto. Seguiremos usando los .xml hasta que el cambio sea obligatorio y esté consolidado como usar los .dat.
+
+Ver hilo de correo "Directorio de preferencias en la portable" en la lista de desarrollo

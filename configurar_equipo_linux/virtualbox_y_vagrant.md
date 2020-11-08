@@ -43,13 +43,13 @@ Usando vagrant una forma sencilla de mantener el "guest addition" actualizado es
 La versión de los repositorios suele estar _demasiado_ anticuada, por lo que es mejor [descargarlo desde la propia web](https://www.vagrantup.com/downloads.html), y mantener el paquete actualizado de forma manual.
 
 ```
-VERSION=2.1.2
-wget https://releases.hashicorp.com/vagrant/${VERSION}/vagrant_${VERSION}_x86_64.deb
-sudo dpkg -i vagrant_1.9.1_x86_64.deb
+VERSION=2.2.9
+wget "https://releases.hashicorp.com/vagrant/${VERSION}/vagrant_${VERSION}_x86_64.deb"
+sudo dpkg -i "vagrant_${VERSION}_x86_64.deb"
 vagrant version
 ```
 
-En principio no es necesaria ninguna configuración, pero hay varios plugins bastante útiles que pueden ser instalados:
+En principio no es necesaria ninguna configuración, pero hay varios plugins útiles que pueden ser instalados:
 
 ```
 # Actualiza `guest additions` en cada guest
@@ -61,3 +61,7 @@ vagrant plugin install vagrant-vbguest
 
 -   Vagrant hay que actualizarlo a mano descargando el paquete de nuevo
 -   Los plugins se actualizan mediante `vagrant plugin update`
+
+### Plugins que no se deben usar
+
+-   vagrant-cachier. Da más problemas de los que soluciona. Es continuo el problema de permisos, y errores aleatorios.

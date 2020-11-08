@@ -42,9 +42,14 @@ En la siguiente imagen identificamos con círculos rojos todos los errores de es
 -   En D2, tenemos un salto de línea tras la unidad
 -   En E5, tenemos varios espacios en blanco al final del comentario
 
-La forma más rápida y seguramente también la más sencilla de eliminar estos espacios de toda la hoja al mismo tiempo es mediante la utilidad de "Find & Replace" de la hoja de cálculo que generalmente se encuentra en el menú "Edit".
+Eliminar todos los espacios en una sóla operación en Excel no es del todo sencillo sin la ayuda de complementos. En los siguientes enlaces se exponen algunas posibilidades:
 
-Asegurándonos de que no tenemos ninguna fila o columna seleccionada lanzamos la herramienta de "Find & Replace". En este ejemplo usamos LibreOffice:
+-   [How To Remove Leading And Trailing Spaces In Excel Cells?](https://www.extendoffice.com/documents/excel/667-excel-remove-first-space.html)
+-   [How to remove spaces in Excel - leading, trailing, non-breaking](https://www.ablebits.com/office-addins-blog/2016/11/23/remove-spaces-excel/)
+
+La forma más rápida y seguramente también la más sencilla de eliminar estos espacios de toda la hoja al mismo tiempo es usando la utilidad de `Edit -> Find & Replace` de _LibreOffice Calc_.
+
+Asegurándonos de que no tenemos ninguna fila o columna seleccionada lanzamos la herramienta de "Find & Replace":
 
 -   En "Find", introduciremos el siguiente texto: `^\s*|\s*$`
 -   El valor de "Replace" lo dejaremos en blanco
