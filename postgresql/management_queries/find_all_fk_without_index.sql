@@ -1,5 +1,11 @@
 -- https://www.cybertec-postgresql.com/en/index-your-foreign-key/
 
+-- Another, probably better way to do this:
+-- http://www.databasesoup.com/2014/11/finding-foreign-keys-with-no-indexes.html
+
+-- How to automatize the creation of the index:
+-- https://blog.codedose.com/2016/05/25/how-to-find-missing-foreign-key-indexes-in-postgresql/
+
 -- USAGE:
 -- psql -f find_all_fk_without_index.sql
 
