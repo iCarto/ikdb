@@ -64,6 +64,12 @@ Vagrant.configure(2) do |config|
         vb.customize ["modifyvm", :id, "--cpuexecutioncap", "85"]
         # Fijar la cantidad de memoria que queremos para el guest
         vb.memory = "1512"
+
+        # En caso de error como:
+        # Stderr: VBoxManage.exe: error: RawFile#0 failed to create the raw output file ... (VERR_PATH_NOT_FOUND)
+        # VBoxManage.exe: error: Details: code E_FAIL (0x80004005), component ConsoleWrap, interface IConsole
+        # descomentar la siguiente línea (https://github.com/joelhandwell/ubuntu_vagrant_boxes/issues/1):
+        # vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
     end
 
     # La carpeta donde está el Vagrantfile se comparte automáticamente con el guest
