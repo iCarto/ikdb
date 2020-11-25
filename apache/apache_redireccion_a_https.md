@@ -46,7 +46,7 @@ y tiene en cuenta el puerto, `path` y `query_string`
 
 ## Explicación de la redirección anterior
 
--   Se puede usar SERVER_NAME
+-   En lugar de harcodear el dominio en la redirección se podría usar la variable `SERVER_NAME`
 
 ```
 # https://httpd.apache.org/docs/current/mod/core.html#servername
@@ -54,13 +54,16 @@ RewriteRule ^(.*) https://%{SERVER_NAME}$1 [R,L]
 ```
 
 -   Cuando en el texto anterior se usa `dominio` se pueden emplear también subdominios como `icarto.es` o `foo.icarto.es`
+-   Dentro de un `VirtualHost` lo que viene a continuación de `RewriteRule`, en este caso la expresión regular `^(.*)$`, se usa para evaluar el _path_ y el _query string_. No afecta al matcheo de puerto, dominio o protocolo. Pero si debe en cuenta el emparejado de `/`. En `http://ejemplo.com` el texto sobre el que se aplicaría la expresión regular sería una cadena vacía. En `http://ejemplo.com/` el texto sobre el que se aplicaría la expresión regular sería `/`. En `http://ejemplo.com/api/foo?id=5` el texto sobre el que se aplicaría la expresión regular sería `/api/foo?id=5`
 
-*   `^(.*)$`. Dentro de un `VirtualHost` lo que viene a continuación de `RewriteRule` se usa para emparejar el _path_ y el _query string_, no afecta al matcheo de puerto, dominio protocolo. E incluye el matcheo de la `/`. Hay otras opciones de escribirlo pero esta parece la más clara. Y debería respetar que se use `/` o no al final del dominio sin nada más, pero cuando se usa la ip la redirección está metiendo `//` cuando no hay _path_. Es un _bug_ no grave a investigar.
-*   `/$1`. `$1` es el primer grupo que emparejamos en la expresión regular. Como estamos buscando explícitamente la `/` y dejándola fuera del grupo tenemos que escribirla al construir la url a la que redireccionamos.
-*   `END`. No apliques más reglas de redirección estén donde estén.
-*   `NE`. No conviertas caracteres como `#` a su código hexadecimal cuando redirecciones.
-*   [R=301] fuerza la redirección externa de forma permanente.
-*   Cuidado con poner los comentarios en la misma línea que la expresión porqué puede dar problemas
+-   `^(.*)$`. Hay otras opciones de escribirlo pero esta parece la más clara. Y respeta que el usuario haya tecleado `http://ejemplo.com` o `http://ejemplo.com/` redireccionandolo respectivamente a `https://ejemplo.com` y `https://ejemplo.com/`.
+-   En la expresión anterior hay un bug, pero no es grave. Cuando se accede por ip, sin indicar un _path_ (`http:0.0.0.0/`) la redirección está metiendo `//` (`https://dominio//`)
+-   `$1` es el primer grupo que emparejamos en la expresión regular:`(.*)` y que simplemente trasladamos a la url final. Sería la `/` si existe más el _path_ más el _query string_
+-   En ocasiones se ven artículos en los que con la misma expresión regular la redirección se hace a `https://dominio/$1`. Esta forma no respetaría que el usuario hubiera introducido o no la `/`. Del mismo modo si en la expresión regular se buscara explicitamente la `/` en la redirección sí habría que tenerlo en cuenta.
+-   `END`. No apliques más reglas de redirección estén donde estén.
+-   `NE`. No conviertas caracteres como `#` a su código hexadecimal cuando redirecciones.
+-   `[R=301]` fuerza la redirección externa de forma permanente.
+-   Y como aviso, en los `.conf` de apache las líneas de comentario deben estar en líneas separadas a las de código, porque puede dar problemas
 
 ## Redireccionar https://ip a https://dominio
 
@@ -78,9 +81,9 @@ En este punto se explica porqué una redirección de este tipo no funciona corre
 </VirtualHost>
 ```
 
--   -   [OR]. Las `RewriteCond` en lineas distintas se interpretan como un `AND`. Con este flag se interpretan como `OR`
--   `!dominio` entraría a funcionar cuando el acceso esa https//ip, y sería una regla válida porqué hemos asumido que hay sólo una web en el apache
--   No funciona porqué los certificados, al menos los de Let's Encrypt, no se conceden a ips. La evaluación del certificado se produce antes de la redirección, saldrá el mensaje de certificado inválido y aunque sea aceptado, el navegador no está aceptando la redirección.
+-   `[OR]`. Las `RewriteCond` en lineas distintas se interpretan como un `AND`. Con este flag se interpretan como `OR`
+-   `!=dominio` entraría a funcionar cuando el acceso sea a través de `https://ip` y no (`!=`) a través de `https://dominio`, y sería una regla válida porqué hemos asumido que hay sólo una web en el apache. Si se estuviera sirviendo más de un dominio no funcionaría porqué los otros dominios entrarían en esta condición.
+-   Esta redirección no funciona porqué los certificados, al menos los de Let's Encrypt, no se conceden a ips. La evaluación del certificado se produce antes de la redirección, saldrá el mensaje de certificado inválido y aunque ese mensaje sea aceptado, el navegador seguirá con la redirección.
 -   No parece haber una forma de poder conseguir este tipo de redirección sin obtener un certificado para la ip.
 
 ## Referencias
