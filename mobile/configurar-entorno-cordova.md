@@ -1,3 +1,12 @@
+---
+title: "Preparar entorno para proyectos con Apache Cordova"
+author:
+    - iCarto
+    - Pablo Sanxiao
+date: 2019-08-29
+license: CC BY-SA 4.0
+---
+
 # Preparar entorno para proyectos con Apache Cordova
 
 **NOTA:** *Estas instrucciones están basadas en la configuración para MacOS, para otro sistema operativo habrá que hacer pequeños ajustes.*
