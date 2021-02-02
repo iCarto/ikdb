@@ -21,7 +21,7 @@ A continuación se describen los pasos y algunos de los parámetros de configura
 
 En pgAdmin desplegamos la lista de bases de datos, pinchamos con el botón derecho sobre el nombre de la que queremos exportar y pulsamos en `Backup...`. En este ejemplo estaríamos exportando la base de datos llamada `test_arasul`
 
-![Botón derecho sobre la base de datos y Backup](postgresql_dump_pgadmin_1.png)
+![Botón derecho sobre la base de datos y Backup](/images/postgresql_dump_pgadmin_1.png)
 
 ## Parámetros generales del dump
 
@@ -32,7 +32,7 @@ En la primera pestaña (`General`) del diálogo de Backup escogemos las opciones
 -   Encoding: Específica que "encoding" (juego de caracteres) se empleará para crear el dump. Si se deja en blanco lo creará en el `encoding` en que está definida la base de datos. La recomendación es dejarlo en blanco o bien usar `UTF-8`.
 -   Resto de opciones: La recomendación es dejarlas en blanco.
 
-![Opciones Generales](postgresql_dump_pgadmin_2.png)
+![Opciones Generales](/images/postgresql_dump_pgadmin_2.png)
 
 ## Otras opciones del dump
 
@@ -44,10 +44,10 @@ La pestaña `Dump options` nos da opciones adicionales a la hora de configurar e
 -   Queries. No tiene importancia cuando usamos el formato `Custom`.
 -   El resto de opciones también las dejaremos como aparecen por defecto.
 
-![Otras opciones](postgresql_dump_pgadmin_3.png)
+![Otras opciones](/images/postgresql_dump_pgadmin_3.png)
 
 ## Backup y errores
 
 Al pulsar en el botón de `backup` se cerrará el diálogo y a los pocos segundos aparecerá una barra de progreso. Cuando se complete el fichero estará listo. Si aparece algún error podemos pulsar en "More details" y copiar el contenido de esa ventana a un documento que enviar a alguien que nos pueda ayudar a resolver el problema.
 
-![Otras opciones](postgresql_dump_pgadmin_4.png)
+![Otras opciones](/images/postgresql_dump_pgadmin_4.png)

@@ -1,6 +1,6 @@
 # Unable to write inside TEMP environment variable path
 
-![Unable to write inside TEMP](problemas_comunes_windows_images/unable_write_temp_path.jpg)
+![Unable to write inside TEMP](/images/problemas_comunes_windows_images/unable_write_temp_path.jpg)
 
 Este error se suele dar por problemas con la configuración de _Windows Script_. Las causas y por tanto las soluciones son variadas, se sugiere una lista de acciones a probar en orden.
 
@@ -18,7 +18,7 @@ WinKey -> Teclear: `regedit` -> Pulsar Intro -> Localizar en el árbol de la izq
 
 En el panel de la derecha debería aparecer una entrada con `name=(Default)` y `Data=VBSFile` respetando mayúsculas y minúsculas. Si no es así editar para que tenga este aspecto.
 
-![Asociar ficheros .vbs a Windows Script](problemas_comunes_windows_images/damaged_vbs_fixed.png)
+![Asociar ficheros .vbs a Windows Script](/images/problemas_comunes_windows_images/damaged_vbs_fixed.png)
 
 [Referencia](https://igordcard.blogspot.com.es/2012/03/unable-to-write-inside-temp-environment.html)
 
@@ -70,7 +70,7 @@ A veces aparece también como **Error running post install step. Installation ma
 
 # An error ocurred executing the Microsoft VC++ runtime installer
 
-![Error ocurred executing the Microsoft VC++ runtime installer](problemas_comunes_windows_images/error_executing_microsoft_vc.png)
+![Error ocurred executing the Microsoft VC++ runtime installer](/images/problemas_comunes_windows_images/error_executing_microsoft_vc.png)
 
 * Crear acceso directo al instalador de postgres
 * Botón derecho sobre el acceso directo -> Propiedades
@@ -81,7 +81,7 @@ A veces aparece también como **Error running post install step. Installation ma
 
 # get_locales.exe unknown signal
 
-![getlocales.exe: child killed : unknown signal](problemas_comunes_windows_images/get_locales_error.png)
+![getlocales.exe: child killed : unknown signal](/images/problemas_comunes_windows_images/get_locales_error.png)
 
 ## Referencias
 

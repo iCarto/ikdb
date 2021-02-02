@@ -14,7 +14,7 @@ Si bien hay distintas estrategias para revisar esta situación en una hoja de c�
 
 A continuación mostramos un ejemplo. Si bien a primera vista se pueden apreciar algunos de los errores
 
-![1](eliminar_espacios_sobrantes_1.png)
+![1](/images/eliminar_espacios_sobrantes_1.png)
 
 Si examinamos la versión en csv vemos que hay más de los que se pueden explorar a simple vista:
 
@@ -34,7 +34,7 @@ ID,N de Exploração,Nome Exploração,Unidade,Observação
 
 En la siguiente imagen identificamos con círculos rojos todos los errores de este tipo:
 
-![2](eliminar_espacios_sobrantes_2.png)
+![2](/images/eliminar_espacios_sobrantes_2.png)
 
 -   En D1, tenemos dos espacios al inicio del código
 -   En B2, tenemos un espacio al inicio del código
@@ -56,7 +56,7 @@ Asegurándonos de que no tenemos ninguna fila o columna seleccionada lanzamos la
 -   Pulsamos en "Other Options" y marcamos "Regular Expressions"
 -   Pulsamos en "Replace All". Confirmamos y cerramos las distintas ventanas
 
-![3](eliminar_espacios_sobrantes_3.png)
+![3](/images/eliminar_espacios_sobrantes_3.png)
 
 Con esto habremos eliminado todos los "leading and trailing whitespaces", quedando el csv resultante con este aspecto:
 

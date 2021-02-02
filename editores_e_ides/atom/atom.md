@@ -1,4 +1,4 @@
--   Instalar editor config. Ver "atom_editor_config.md"
--   Instalar formatters: Ver `atom_formatter_*.md`
--   Configurar linters
-    -   estilo_de_codigo_atom_linters_python.md
+*   Instalar editor config. Ver "atom_editor_config.md"
+*   Instalar formatters: Ver `atom_formatter_*.md`
+*   Configurar linters
+    *   estilo_de_codigo_atom_linters_python.md
