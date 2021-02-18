@@ -191,3 +191,4 @@ tail -50 /var/log/bucardo/log.bucardo
 -   [Postgres session_replication role - Bucardo and Slony’s powerful ally](https://www.endpoint.com/blog/2015/01/28/postgres-sessionreplication-role)
 -   [Version 5 of Bucardo database replication system](https://www.endpoint.com/blog/2014/06/23/bucardo-5-multimaster-postgres-released)
 -   [Bucardo Replication Update is Slow?](https://saifulmuhajir.web.id/postgresql-bucardo-replication-update-is-slow/)
+-   [Dockerfile para la instalación de Bucardo](https://github.com/pelgrim/bucardo_docker_image). Es útil para al menos tener una alternativa para la automatización de la instalación que suele ser problemática.
