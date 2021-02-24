@@ -83,6 +83,12 @@ $ cd myApp
 $ ionic capacitor add android
 ```
 
+Si este comando nos da un error del estilo "*Capacitor could not find the web assets directory...*", ejecutar primero:
+
+```
+$ ionic build
+```
+
 Entre otras cosas, esto habrá creado un fichero *capacitor.config.json* en el directorio raíz de nuestra aplicación. Es conveniente editar al menos el *appid* que será el nombre que identificará
 a nuestra aplicación.
 
@@ -107,4 +113,11 @@ Si queremos tener un servidor que permita recargar automáticamente la aplicaci�
 
 ```
 $ ionic capacitor run android -l --host=YOUR_IP_ADDRESS
+```
+
+o, de forma alternativa:
+
+
+```
+$ ionic capacitor run android -l --external
 ```
