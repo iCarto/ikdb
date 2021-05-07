@@ -1,4 +1,4 @@
-O# Atom - Formatter - shfmt
+# Atom - Formatter - shfmt
 
 _(Actualizado a Octubre/2019. format-shell v0.2.16)_
 

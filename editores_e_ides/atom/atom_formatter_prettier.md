@@ -38,11 +38,8 @@ formatOnSaveOptions:
   // No queremos por ejemplo que formatee un .html que en realidad es un template de Jinja2. Ver formatters_html.md, formatters_css.md, ...
   // Este punto está bajo discusión
   whitelistedGlobs: [
-        "*.js"
-        "*.{md"
-        "yml"
-        "yaml"
-        "json}"
+        "*.js",
+        "*.{md,yml,yaml,json}"
       ]
   isDisabledIfNoConfigFile: true  // Si no es nuestra configuración y nuestra versión no lo hacemos automático. Se puede lanzar a mano
 
