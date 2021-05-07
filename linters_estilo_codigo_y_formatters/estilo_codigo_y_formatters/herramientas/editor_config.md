@@ -18,6 +18,7 @@ Lo más habitual es usar EditorConfig a través de un plugin para el editor que 
 -   Ver atom_editor_config.md
 -   Ver pycharma_editor_config.md
 -   Ver emacs_editor_config.md
+-   Ver code_editor_config.md
 
 ## Herramientas adicionales
 

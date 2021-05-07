@@ -125,11 +125,7 @@ Después de jugar un poco, queda claro que encontrar la combinación "ideal" es 
 
 [black](https://github.com/python/black) es un formateador de código opinativo. Sus únicas opciones son el máximo de línea y si debe convertir todas las quotes a dobles o no debe hacer esa conversión. El estilo de código que propone es compatible con PEP8 tomando decisiones más "estrictas" en los puntos abiertos del PEP.
 
-A pesar de que puede formatear código de python 2.7, sólo corre sobre la 3.6+ y es capaz de lidiar con Python tipado, f-strings, ...
-
-Tiene plugins para la mayoría de editores, soporte para [Language Server Protocol](https://langserver.org/)
-
-El que sólo corra bajo la 3.6 puede ser un poco problemático en código legacy, dado que correr las herramientas (linting, ...) con la misma versión que el código acaba dando menos problemas, pero funciona correctamente.
+Tiene plugins para la mayoría de editores, soporte para [Language Server Protocol](https://langserver.org/), buena integración pre-commit y resto de herramientas de CI/CD
 
 Lo mejor de `black` es que toma las decisiones por ti, y es el formateador más usado en el momento. Así que si muchos equipos lo usan, es probable que a ti también te valga, aunque no te guste como queda exactamente todo. Recuerda: legible es distinto de bonito.
 
@@ -141,7 +137,8 @@ Se puede configurar a través de un fichero [pyproject.toml](https://www.python.
 
 **Algunos problemas**
 
--   [Se está trabajando en ello](https://github.com/python/black/issues/475) pero por defecto no ignora los patrones definidos en `.gitignore`. Por lo que deben añadirse a mano al `exclude`.
+-   **update. esto ya funciona**. [Se está trabajando en ello](https://github.com/python/black/issues/475) pero por defecto no ignora los patrones definidos en `.gitignore`. Por lo que deben añadirse a mano al `exclude`.
+-   Cuidado con los `trailing comma`. https://github.com/psf/black/blob/master/docs/the_black_code_style.md#the-magic-trailing-comma
 -   El formato de `exclude` es horrible. También hay issues abiertas para permitir un formato como el de `.gitignore`
 
 
@@ -188,10 +185,10 @@ Provee de otras funcionalidades además de ordenar y formatear, como borrar/aña
 Desde la línea de comandos la forma más fácil de correrlo es con:
 
 ```bash
-isort -rc .
+isort --profile black .
 ```
 
-que modifica los ficheros .py "in place" de forma recursiva.
+que modifica los ficheros .py "in place" de forma recursiva, y acorde al formato de `black`
 
 ## Instalación y configuración
 
@@ -199,27 +196,30 @@ Si el proyecto está en esa versión de Python lo mejor es añadirlo a `requirem
 
 Se puede configurar a través de un fichero [pyproject.toml](https://www.python.org/dev/peps/pep-0518/).
 
-    #pyproject.toml
-    [tool.isort]
-    line_length = 88
-    atomic = true # `true` cuando la versión de python target y que corre isort es la misma
-    include_trailing_comma = true
-    multi_line_output = 3 # El 5 ahorra espacio, pero para evitar rewrites de la salida de black
-    force_grid_wrap = 0
-    lines_after_imports = 2
-    use_parentheses = true
-    filter_files = true # No documentado. Fuerza que se cumpla skip y skip_glob aunque se le pase el fichero por línea de parámetros. Útil para hooks
-    skip_glob = ["*.egg", "*.egg-info", "__pycache__", "build/", "node_modules"] # Ajustar en cada proyecto
-    combine_as_imports = false # Revisar
-    known_third_party = ["bcrypt", "pyramid", "sqlalchemy", "geoalchemy2", "django", "requests"]
-    known_first_party = ["mypackage"] # Ajustar en cada proyecto
+```
+#pyproject.toml
+[tool.isort]
+line_length = 88
+atomic = true # `true` cuando la versión de python target y que corre isort es la misma
+include_trailing_comma = true
+profile = "black"
+multi_line_output = 3 # El 5 ahorra espacio, pero para evitar rewrites de la salida de black
+force_grid_wrap = 0
+lines_after_imports = 2
+use_parentheses = true
+filter_files = true # No documentado. Fuerza que se cumpla skip y skip_glob aunque se le pase el fichero por línea de parámetros. Útil para hooks
+skip_glob = ["*.egg", "*.egg-info", "__pycache__", "build/", "node_modules"] # Ajustar en cada proyecto
+combine_as_imports = false # Revisar
+known_third_party = ["bcrypt", "pyramid", "sqlalchemy", "geoalchemy2", "django", "requests"]
+known_first_party = ["mypackage"] # Ajustar en cada proyecto
+```
 
 Para determinar si un paquete es `third party` o `first party` parece ser que isort lo importa realmente, esto puede dar lugar a resultados extraños [#725](https://github.com/timothycrosley/isort/issues/725), [#704](https://github.com/timothycrosley/isort/issues/704), [#498](https://github.com/timothycrosley/isort/issues/498), sobre todo en entornos de `ci`. Lo más sencillo seguramente es añadir a mano paquetes a
-`known_third_party` y `known_first_party` cuando se detecta un problema. La herramienta [seed-isort-config](https://github.com/asottile/seed-isort-config) podría usarse para modificar el valor de estas opciones, pero tampoco se ha comportado a prueba de balas en las pruebas realizadas así que no la usamos.
+`known_third_party` y `known_first_party` cuando se detecta un problema.
 
 **Algunos problemas**
 
--   Como sucede con `black` por defecto no ignora los patrones de .gitignore y hay que configurarlos a mano mediante `skip`, `skip_glob` y/o `filter-files`
+-   Como sucede con `black` por defecto no ignora los patrones de .gitignore (debe usarse `skip_gitignore`). Otras rutas deben configurarse a mano mediante `skip`, `skip_glob` y/o `filter-files`
 
 # Configuración iCarto
 
@@ -229,7 +229,7 @@ Incluimos un script en `package.json` con como se lanzaría para ejecutarlos sob
 
 ```json
 "scripts": {
-    "pretty:python": "black . && isort -rc ."
+    "pretty:python": "black . && isort ."
 },
 ```
 
