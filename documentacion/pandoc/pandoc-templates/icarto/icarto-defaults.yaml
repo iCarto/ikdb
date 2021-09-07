@@ -1,0 +1,3 @@
+pdf-engine: xelatex
+variables:
+  block-headings: true

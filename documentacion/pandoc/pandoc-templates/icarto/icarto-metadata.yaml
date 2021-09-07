@@ -1,0 +1,8 @@
+graphics: true
+colorlinks: true
+mainfont: Arial
+toc: true
+toc-depth: 4
+toc-title: Tabla de contenidos
+numbersections: true
+fontsize: 11pt
