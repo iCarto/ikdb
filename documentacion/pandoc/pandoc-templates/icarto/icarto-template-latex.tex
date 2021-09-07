@@ -506,6 +506,8 @@ $endif$
 \fancyfoot[C]{\small\color{lightgray}{\textbf{Icarto}} · Innovación, Cooperación, Cartografía e Territorio \\ \href{www.icarto.es}{www.icarto.es}}
 \fancyfoot[R]{\large\color{teal}\textbf\thepage}
 
+\usepackage[none]{hyphenat}
+
 \makeatletter
 \def\maketitle{% Title page
     \null
@@ -531,6 +533,7 @@ $endif$
 
 \begin{document}
 
+\sloppy
 $if(has-frontmatter)$
 \frontmatter
 $endif$
