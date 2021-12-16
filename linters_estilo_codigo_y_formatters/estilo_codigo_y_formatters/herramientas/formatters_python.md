@@ -123,7 +123,7 @@ Después de jugar un poco, queda claro que encontrar la combinación "ideal" es 
 
 # black
 
-[black](https://github.com/python/black) es un formateador de código opinativo. Sus únicas opciones son el máximo de línea y si debe convertir todas las quotes a dobles o no debe hacer esa conversión. El estilo de código que propone es compatible con PEP8 tomando decisiones más "estrictas" en los puntos abiertos del PEP.
+[black](https://github.com/python/black) es un formateador de código opinativo, con muy pocas opciones de configuración y defaults sanos. El estilo de código que propone es compatible con PEP8 tomando decisiones más "estrictas" en los puntos abiertos del PEP.
 
 Tiene plugins para la mayoría de editores, soporte para [Language Server Protocol](https://langserver.org/), buena integración pre-commit y resto de herramientas de CI/CD
 
@@ -135,46 +135,15 @@ Lo mejor de `black` es que toma las decisiones por ti, y es el formateador más 
 
 Se puede configurar a través de un fichero [pyproject.toml](https://www.python.org/dev/peps/pep-0518/).
 
-**Algunos problemas**
+**Algunos problemas y observaciones**
 
--   **update. esto ya funciona**. [Se está trabajando en ello](https://github.com/python/black/issues/475) pero por defecto no ignora los patrones definidos en `.gitignore`. Por lo que deben añadirse a mano al `exclude`.
--   Cuidado con los `trailing comma`. https://github.com/psf/black/blob/master/docs/the_black_code_style.md#the-magic-trailing-comma
--   El formato de `exclude` es horrible. También hay issues abiertas para permitir un formato como el de `.gitignore`
-
-
-    #pyproject.toml
-
-    [tool.black]
-    line-length = 88
-    # Mejor ser explícitos con la versión de python y los strings
-    target-version = ['py36']
-    skip-string-normalization = false
-
-    # Ajustar en cada proyecto
-    exclude = '''
-    /(
-        \.eggs
-      | \.git
-      | \.mypy_cache
-      | \.tox
-      | \.venv
-      | _build
-      | buck-out
-      | build
-      | dist
-      | __pycache__
-
-      | \.egg-info
-      | node_modules
-      | \.idea
-      | \.vscode
-      | \.vagrant
-    )/
-    '''
+-   En general no se debería usar `exclude` sino `extend-exclude` para que tenga en cuenta el `.gitignore`. [#475](https://github.com/python/black/issues/475)
+-   Cuidado con los `trailing comma`. https://black.readthedocs.io/en/latest/the_black_code_style/current_style.html#the-magic-trailing-comma
+-   El formato de `exclude` o `extend-exclude` es horrible.`
 
 black también formatea los imports pero no los reordena. En el README de black se incluye una configuración compatible para isort.
 
-Se puede ejecutar con `black .`
+Se puede ejecutar con `black .`. En la carpeta de scaffolder de este repo está la configuración usada en iCarto.
 
 # isort
 

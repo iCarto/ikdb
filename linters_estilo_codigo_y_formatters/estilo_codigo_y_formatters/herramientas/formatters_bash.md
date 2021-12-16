@@ -68,7 +68,6 @@ En iCarto usamos _shfmt_ con las opciones: `-w -l -i 4 -bn -sr -ci`. Se lanza en
 ```
 VERSION="2.6.4"
 url="https://github.com/mvdan/sh/releases/download/v${VERSION}/shfmt_v${VERSION}_linux_amd64"
-# url="https://github.com/mvdan/sh/releases/download/v${VERSION}/shfmt_v${VERSION}_darwin_amd64"
 
 mkdir -p "${HOME}/bin/"
 

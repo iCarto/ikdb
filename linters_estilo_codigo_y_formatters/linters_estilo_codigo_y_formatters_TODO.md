@@ -6,8 +6,9 @@ A medida que probamos las herramientas, descubrimos nuevas lecturas y escribimos
 
 -   [ ] Probar las configuraciones de pre-commit
 -   [ ] Valorar script de bandit en package.json
--   [ ] Valorar mezclar disintos comportamientos en los scripts de package.json. Por ejemplo bandit+flake
+-   [ ] Valorar mezclar distintos comportamientos en los scripts de package.json. Por ejemplo bandit+flake
 -   [ ] Reorganizar carpetas. A que nivel hablar de "estilo_codigo", "linters", "herramientas_scaffolders", ...
+-   [ ] Método estándar para lanzar las herramientas de formateado y lint. En `package.json`, `make`, `scripts to rule then all`, ...
 -   [x] linters de bash
 -   [ ] linters de python "genéricos"
 -   [ ] linters o métricas de complejidad, ... de python, tipo mcabe
