@@ -14,7 +14,10 @@ La recomendación es instalar desde los repositorios propios de la distribución
 # Substituir por el usuario deseado
 USER=$(whoami)
 
-sudo apt install virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso virtualbox-guest-x11 virtualbox-dkms
+sudo apt install virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso virtualbox-dkms
+
+# Si no estamos en un entorno de servidor seguir con estas instrucciones
+sudo apt install virtualbox-guest-x11
 sudo usermod -a -G vboxusers $USER
 sudo usermod -a -G video,audio,pulse-access $USER
 sudo usermod -a -G audio pulse
@@ -43,7 +46,7 @@ Usando vagrant una forma sencilla de mantener el "guest addition" actualizado es
 La versión de los repositorios suele estar _demasiado_ anticuada, por lo que es mejor [descargarlo desde la propia web](https://www.vagrantup.com/downloads.html), y mantener el paquete actualizado de forma manual.
 
 ```
-VERSION=2.2.9
+VERSION=2.2.18
 wget "https://releases.hashicorp.com/vagrant/${VERSION}/vagrant_${VERSION}_x86_64.deb"
 sudo dpkg -i "vagrant_${VERSION}_x86_64.deb"
 vagrant version
