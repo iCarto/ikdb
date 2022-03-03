@@ -15,13 +15,16 @@ Una vez instalado cada vez que queramos actualizar:
 ```shell
 sudo n stable
 sudo npm i -g npm
+sudo npm i -g npx
 npm -v
 node -v
 ```
 
+Instalamos también [npx](https://www.npmjs.com/package/npx) de modo global dado que es una herramienta útil y que en iCarto usamos en las configuraciones de pre-commit en local.
+
 ## Otras opciones
 
-En caso de hacer mucho desarrollo con node, es conveniente instalar un gestor de versiones de node al estilo de pyenv llamado `nvm`.
+En caso de hacer mucho desarrollo con node, es conveniente instalar un gestor de versiones de node al estilo de `pyenv` llamado `nvm`.
 
 ## En caso de problemas.
 
