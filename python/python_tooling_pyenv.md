@@ -48,6 +48,8 @@ pyenv, más sus plugins tiene bastantes [comandos](https://github.com/pyenv/pyen
 
 -   Las versiones de Python disponibles para instalar dependen de la versión de pyenv que tengamos instaladas, así que debemos actualizarlo periódicamente `pyenv update`
 
+-   pyenv compila las versiones de Python. Si actualizamos el sistema operativo puede haber dependecias que se rompan. Tras un cambio de versión del sistema operativo (ie: Ubuntu 18.04 -> Ubuntu 20.04), es conveniente eliminar todos los entornos virtuales y las versiones de Python instaladas a través de pyenv y volver a generarlas.
+
 -   Tras instalar pyenv de la forma recomendada, es necesario hacer un logout completo del sistema. Hacer un script bash de provisionamiento (de una máquina Vagrant por ejemplo, o de un entorno de desarrollo) que lo instale, descargue Python y cree un virtualenv necesita bastantes _triquiñuelas_. En los proyectos de iCarto se pueden ver ejemplos de este tipo de scripts.
 
 -   El plugin de `pyenv-virtualenv` tiene comportamientos que puede resultar confuso para alguna gente. Ver por ejemplo este bug: https://github.com/pyenv/pyenv-virtualenv/issues/135.
@@ -65,30 +67,6 @@ pyenv, más sus plugins tiene bastantes [comandos](https://github.com/pyenv/pyen
 ## Configuración iCarto
 
 En iCarto usamos `pyenv` para gestionar las versiones de Python en el entorno de desarrollo, y lo combinamos con `virtualenvwrapper`.
-
-En Ubuntu lo instalamos del siguiente modo:
-
-```shell
-sudo apt-get update
-sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
-sed -Ei -e '/^([^#]|$)/ {a \
-export PYENV_ROOT="${HOME}/.pyenv"
-a \
-export PATH="${PYENV_ROOT}/bin:${PATH}"
-a \
-' -e ':a' -e '$!{n;ba};}' ~/.profile
-
-echo '
-eval "$(pyenv init --path)"
-' >> ~/.profile
-
-echo '
-eval "$(pyenv init -)"
-' >> ~/.bashrc
-```
-
-Tras instalarlo debemos hacer un _logout_ del sistema para que esté plenamente activo. Si quisiéramos usarlo en la misma sesión o en un script de provisionamiento es un poco más complicado. Se pueden ver ejemplos en los [proyectos publicados de iCarto](https://gitlab.com/icarto).
 
 Cuando creamos un _virtualenv_ para un proyecto lo hacemos a través de scripts de forma parecida a esta:
 
@@ -114,3 +92,29 @@ workon "${PROJECT_NAME}"
 ```
 
 Para crear _virtualenv_ temporales o de pruebas podemos jugar con la variable `VIRTUALENVWRAPPER_PYTHON` de nuestro `.bashrc` para tener una versión de Python predefinida con lo que simplemente ejecutaríamos: `mkvirtualenv -a mi_proyecto mi_projecto`, usar una sentencia como el ejemplo de virtualenvwrapper que pusimos en una sección anterior, o incluso crear una pequeña función en nuestro `.bashrc`
+
+### Instalación
+
+En Ubuntu 20.04 lo instalamos del siguiente modo:
+
+```shell
+sudo apt-get update
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+sed -Ei -e '/^([^#]|$)/ {a \
+export PYENV_ROOT="${HOME}/.pyenv"
+a \
+export PATH="${PYENV_ROOT}/bin:${PATH}"
+a \
+' -e ':a' -e '$!{n;ba};}' ~/.profile
+
+echo '
+eval "$(pyenv init --path)"
+' >> ~/.profile
+
+echo '
+eval "$(pyenv init -)"
+' >> ~/.bashrc
+```
+
+Tras instalarlo debemos hacer un _logout_ del sistema (_host_, equipo de desarrollo) para que esté plenamente activo. Si quisiéramos usarlo en la misma sesión o en un script de provisionamiento es un poco más complicado. Se pueden ver ejemplos en los directorios `server` de los [proyectos publicados de iCarto](https://gitlab.com/icarto).
