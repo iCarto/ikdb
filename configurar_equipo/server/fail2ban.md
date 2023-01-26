@@ -437,6 +437,13 @@ The jail sshd has the following actions:
 iptables-multiport
 ```
 
+Obtener todos los bloqueos activos:
+
+```shell
+fail2ban-client banned
+[{'sshd': []}, {'apache-auth': []}, {'apache-badbots': []}, {'apache-noscript': []}, {'apache-overflows': []}, {'apache-nohome': []}, {'apache-botsearch': []}, {'apache-fakegooglebot': []}, {'apache-modsecurity': []}, {'apache-shellshock': []}, {'apache-pass': []}]
+```
+
 Obtener las IPs bloqueadas por un Jail:
 
 ```shell
