@@ -60,30 +60,29 @@ apt install fail2ban
 
 Estos son algunos de los filtros preinstalados para estos servicios
 
-    Apache    
+  Apache
     - apache-auth.conf, errores de autenticación de Apache
     - apache-badbots.conf, spam bots y bad web crawlers
     - apache-botsearch.conf, requests de urls que no existen
     - apache-fakegooglebot.conf, errores por intento de crawl de bots que utilizan un falso user agent de Googlebot
     - apache-modsecurity.conf, detecta avisos de modsecurity web application firewall
+    - apache-shellshock.conf, intento de explotar la vulnerabilidad shellshock
+    - apache-overflows.conf, intento de realizar un ataque de overflow del buffer de Apache
     - apache-nohome.conf, detecta errores en el acceso al directorio home
     - apache-noscript.conf, detecta busqueda oitebcuak de exploits y vulnerabilidades php
-    - apache-overflows.conf, intento de realizar un ataque de overflow del buffer de Apache
-    - apache-pass.conf,
-    - apache-shellshock.conf, intento de explotar la vulnerabilidad shellshock
 
-    SSH
+  SSH
     - sshd.conf, errores de inicio de sesión SSH
 
-    Postfix
+  Postfix
     - postfix.conf, errores de autenticación de Postfix SMTP y SASL
 
-    NGINX
+  NGINX
     - nginx-botsearch.conf, errores por peticiones de URLs que inexistentes
     - nginx-http-auth.conf, errores de autenticación
     - nginx-limit-req.conf, errores por limite procesamiento de peticiones de una IP
 
-    (...)
+  (...)
 
 Es posible configurar servicios personalizados utilizando filtros creados por la comunidad y organizaciones o crear filtros personalizados como se explica en la seccion **Configurar un servicio personalizado**.
 
@@ -135,9 +134,10 @@ Configurar bloqueos:
 - `banaction`: establece la acción que se usará cuando se alcance el umbral.
 - `protocol`: Tipo de tráfico que se eliminará (TCP, UDP).
 - `action`: Define las acciones de bloqueo que se aplicarán en cada uno de los servicios.
-  - %(action_)s, Bloquea host.
-  - %(action_mw)s, Bloquea y envia e-mail con whois.
-  - %(action_mwl)s, Como el anterior añadiendo lineas de log.
+
+  - `%(action_)s`, Bloquea host.
+  - `%(action_mw)s`, Bloquea y envia e-mail con whois.
+  - `%(action_mwl)s`, Como el anterior añadiendo lineas de log.
 
 - `usedns`: Utilizar IPs u obtener nombre de Host para realizar el baneo.
 - `port`: puertos en los que trabaja el servicio que queremos proteger.
@@ -153,7 +153,8 @@ Configurar envio de mails:
 - `destemail`: Dirección a la que se enviarán las notificaciónes si se configura el envio de alertas por correo en las acciones.
 - `sender`: Dirección con la que fail2ban enviará los emails.
 
-Existen más parametros, pueden comprobarse revisando la documentación 
+Existen más parametros, pueden comprobarse revisando la documentación
+
 ```shell
 man jail.conf
 ```
@@ -449,7 +450,7 @@ No IP address/network is ignored
 ```shell
 > fail2ban-client set sshd dellogpath /var/log/auth.log
 > fail2ban-client set sshd addlogpath /var/log/auth.log
-``` 
+```
 
 ### Limitaciones
 
