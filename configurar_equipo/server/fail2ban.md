@@ -18,7 +18,7 @@
 
 ---
 
-Fail2ban es una herramienta que actua como _Sistema de Deteccion de intrusos (IDS o HIDS)_. Lo hace escaneando los ficheros de log de diferentes servicios utilizando reglas definidas mediante expresiones regulares (_filter-rules_).
+Fail2ban es una herramienta que actua como _Sistema de Deteccion de intrusos (IDS o HIDS)_  detectando _ataques por fuerza bruta_. Lo hace escaneando los ficheros de log de diferentes servicios utilizando reglas definidas mediante expresiones regulares (_filter-rules_).
 Esto le permite detectar IPs que muestren un comportamiento malicioso como: multiples fallos de autenticación, escaneo de puertos, busqueda de exploits...
 
 Tras detectar una direccion IP con un comportamiento sospechoso ejecutará una accion (_action_) sobre ella. Esta accion generalmente consiste en actualizar las reglas del Firewall (UFW, iptables, nftables...)
@@ -111,40 +111,52 @@ Fuera de esta carpeta el fichero `/etc/default/fail2ban` se utiliza para definir
 
 ---
 
-En primer lugar es necesario realizar una copia del fichero `jail.conf` renombrandolo a `jail.local`. Ya que el original se sobreescribe durante las actualizaciones, y utilizarlo implica un riesgo de perder los cambios que hayamos realizado.
+En primer lugar es necesario realizar una copia del fichero `jail.conf` renombrandolo a `jail.local`. Ya que el original se sobreescribe durante las actualizaciones, y utilizarlo implica un riesgo de perder los cambios que hayamos realizado. Todos los archivos de configuración pueden ser sustituidos por un archivo con extensión '.local' que se utilizara en su lugar.
 
 ```shell
 sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 ```
 
-En este fichero y en los de la carpeta jail.d se encuentran las configuraciones de todos los _Jails_ que podemos usar. En un principio estan todos deshabilitados excepto el sshd.
+En este fichero y en la carpeta `/etc/fail2ban/jail.d/' se encuentran las configuraciones de todos los _Jails_ que podemos usar. En un principio estan todos deshabilitados excepto el sshd.
 
-En el apartado [DEFAULT] de este fichero se definen los valores predeterminados para la política fail2ban. Estas opciones pueden sobreescribirse en la sección de configuración de cada servicio individual, estas son algunas:
+En el apartado [DEFAULT] de el fichero de configuración, o en `/etc/fail2ban/jail.d/default-<DISTRIBUCIÓN>.conf` se definen los valores predeterminados para las políticas de fail2ban. Estas politicas se utilizaran a menos que sean redefinidas en la seccion de configuración de cada servicio o creando un fichero de configuración en la carpeta  `/etc/fail2ban/jail.d/'
 
+Estos son los principales parametros:
+
+Configuración general:
+
+- `enabled`: true o false. Activa o desactiva la protección para un determinado servicio
+- `filter`: Nombre del filtro que usa el jail para detectar coincidencias. Cada coincidencia incremente el contador del jail.
+- `logpath`: Ruta al fichero de logs que se le
+  va a proporcionar al filtro (/var/log/messages).
+
+Configurar bloqueos:
+
+- `banaction`: establece la acción que se usará cuando se alcance el umbral.
+- `protocol`: Tipo de tráfico que se eliminará (TCP, UDP).
+- `action`: Define las acciones de bloqueo que se aplicarán en cada uno de los servicios.
+  - %(action_)s, Bloquea host.
+  - %(action_mw)s, Bloquea y envia e-mail con whois.
+  - %(action_mwl)s, Como el anterior añadiendo lineas de log.
+
+- `usedns`: Utilizar IPs u obtener nombre de Host para realizar el baneo.
+- `port`: puertos en los que trabaja el servicio que queremos proteger.
 - `ignoreip`: Permite introducir IPs en un [whitelist](https://www.fail2ban.org/wiki/index.php/Whitelist) para evitar el baneo.
 - `bantime`: El tiempo que dura el baneo en segundos, (-1 = permanente).
 - `bantime.increment`: Define si se incrementa el tiempo de baneo al reincidir.
 - `maxretry`: Numero de fallos antes del baneo.
 - `findtime`: Tiempo en el que se contabilizan los fallos para un baneo en segundos
 
-Aqui algunas de las que se utilizan para definir cada servicio:
+Configurar envio de mails:
 
-- `enabled`: true o false. Activa o desactiva la protección para un determinado servicio
-- `port`: puertos en los que trabaja el servicio que queremos proteger.
-- `filter`: Nombre del filtro que usa el jail para detectar coincidencias. Cada coincidencia incremente el contador del jail.
-- `logpath`: Ruta al fichero de logs que se le
-  va a proporcionar al filtro (/var/log/messages).
-- `action`: Define las acciones de bloqueo que se aplicarán en cada uno de los servicios.
-- `usedns`: Utilizar IPs u obtener nombre de Host para realizar el baneo.
+- `mta`: programa con el que se envia el mensaje (postfix, sendmail)
 - `destemail`: Dirección a la que se enviarán las notificaciónes si se configura el envio de alertas por correo en las acciones.
 - `sender`: Dirección con la que fail2ban enviará los emails.
-- `sendername`: Nombre que aparecerá en los correos electrónicos de notificación generados.
-- `banaction`: establece la acción que se usará cuando se alcance el umbral.
-- `protocol`: Tipo de tráfico que se eliminará (TCP, UDP).
-- `mta`: programa con el que se envia el mensaje (postfix, sendmail)
-- `bantime`.
-- `maxretry`.
-- `findtime`.
+
+Existen más parametros, pueden comprobarse revisando la documentación 
+```shell
+man jail.conf
+```
 
 ### Configurar un servicio personalizado
 
@@ -154,125 +166,9 @@ En esta documento sobre el [desarrollo de filtros](https://fail2ban.readthedocs.
 
 El desarrollo del filtro se realiza utilizando el formato de las expresiones regulares de Python. ([Python Docs](https://docs.python.org/2/library/re.html)) Para comprobar el funcionamiento de las expresiones regulares se utiliza el comando `fail2ban-regex --help`. Tras crear el filtro se añade al fichero `jail.conf`, se configura a la ruta a los logs, y se le asigna una acción.
 
-### Configuración para Redmine
-
----
-
-Los pasos a seguir para configurar un filtro para redmine están descritos en la [Wiki](https://www.redmine.org/projects/redmine/wiki/HowTo_Configure_Fail2ban_For_Redmine) de Redmine.
-
-Pasan por crear un filtro en el fichero `/etc/fail2ban/filter.d/redmine.conf` con el siguiente contenido:
-
-```conf
-# redmine configuration file
-#
-# Author: David Siewert
-#
-# $Revision$
-#
-[INCLUDES]
-
-# Read common prefixes. If any customizations available -- read them from
-# common.local
-before = common.conf
-
-[Definition]
-
-datepattern = %%Y-%%m-%%d %%H:%%M:%%S %%Z$
-failregex = Failed [-/\w]+ for .* from <HOST>
-
-# Option:  ignoreregex
-# Notes.:  regex to ignore. If this regex matches, the line is ignored.
-# Values:  TEXT
-#
-ignoreregex =
-
-# Source:
-#http://www.fail2ban.org/wiki/index.php/MANUAL_0_8
-```
-
-y añadir al fichero `/etc/fail2ban/jail.conf` el siguiente codigo en la seccion de _Jails_:
-
-```conf
-[redmine]
-enabled  = true
-filter   = redmine
-port     = 80,443
-#backend  = polling
-action   = iptables-allports[name=redmine]
-logpath  = /var/log/redmine/default/production.log
-maxretry = 5
-findtime = 7320
-bantime  = 7320
-```
-
-Reemplazando el `logpath` con la ruta que corresponda al log de tu instalación. Y si usas puertos distintos al 80 y 443 reemplazarlos.
-
-y por último reiniciar el servicio `/etc/init.d/fail2ban restart`
-
-### Configuración para Nextcloud
-
----
-
-En la [Wiki](https://docs.nextcloud.com/server/19/admin_manual/installation/harden_server.html?highlight=fail2ban#setup-fail2ban) de Nextcloud explica como generar un filtro para banear usuarios que acceden desde dominios no seguros, fallen al autenticarse a través del interfaz de usuario o WebDAB.
-
-Crear el fichero `/etc/fail2ban/filter.d/nextcloud.conf` que contenga:
-
-```conf
-[Definition]
-_groupsre = (?:(?:,?\s*"\w+":(?:"[^"]+"|\w+))*)
-failregex = ^\{%(_groupsre)s,?\s*"remoteAddr":"<HOST>"%(_groupsre)s,?\s*"message":"Login failed:
-            ^\{%(_groupsre)s,?\s*"remoteAddr":"<HOST>"%(_groupsre)s,?\s*"message":"Trusted domain error.
-datepattern = ,?\s*"time"\s*:\s*"%%Y-%%m-%%d[T ]%%H:%%M:%%S(%%z)?"
-```
-
-Crear el fichero `/etc/fail2ban/jail.d/nextcloud.local` con el contenido:
-
-```shell
-[nextcloud]
-backend = auto
-enabled = true
-port = 80,443
-protocol = tcp
-filter = nextcloud
-maxretry = 3
-bantime = 86400
-findtime = 43200
-logpath = /path/to/data/directory/nextcloud.log
-```
-
-Reemplazando el `logpath` con la ruta que corresponda nextcloud.log de tu instalación. Y si usas puertos distintos al 80 y 443 reemplazarlos.
-
-y por último reiniciar el servicio `/etc/init.d/fail2ban restart`
-
-### Configuración para PostgreSQL
-
----
-
-En este caso es necesario modificar la información del logs de PostgreSQL añadiendo el Host ID. Editamos el fichero `/etc/postgresql/<VERSION>/main/postgresql.conf` y modificamos el parametro `log_line_prefix = '%h %m [%p] %q%u@%d '`.
-
-Crear el filtro en el fichero `/etc/fail2ban/filter.d/custom-postgres.conf` con el contenido:
-
-```conf
-[Definition]
-failregex = ^<HOST>.+FATAL: password authentication failed for user.+$
-            ^<HOST>.+FATAL: no pg_hba.conf entry for host .+$
-ignoreregex = duration:#
-ignoreregex =
-```
-
-Configurarlo en el fichero `jail.conf`
-
-```conf
-[postgresql]
-enabled = true
-port    = 5432
-protocol = tcp
-filter = custom-postgresql
-logpath = /var/log/postgresql/postgresql-12-main.log
-maxretry = 3
-```
-
-Configurar el logpath y el puerto para que coincida con los de la instalación. Y por último reiniciar los servicios de fail2ban y postgresql.
+- Los pasos a seguir para configurar un filtro para redmine están descritos en la [Wiki](https://www.redmine.org/projects/redmine/wiki/HowTo_Configure_Fail2ban_For_Redmine) de Redmine.
+- En la [Wiki](https://docs.nextcloud.com/server/19/admin_manual/installation/harden_server.html?highlight=fail2ban#setup-fail2ban) de Nextcloud explica como generar un filtro para banear usuarios que acceden desde dominios no seguros, fallen al autenticarse a través del interfaz de usuario o WebDAB.
+- En el caso de postgres es necesario modificar la información del log generado añadiendo el Host ID. El proceso se explica en este [enlace](https://talk.plesk.com/threads/howto-secure-a-standard-postgres-port-with-fail2ban.355984/)
 
 ### Comandos
 
@@ -365,6 +261,12 @@ Recargar la configuración tras realizar un cambio:
 
 ```shell
 > fail2ban-client reload
+```
+
+Aunque en ocasiones es necesario recargar el servicio.
+
+```shell
+> systemctl reload fail2ban
 ```
 
 Ver jails activados:
@@ -487,6 +389,12 @@ Desbloquear IPs:
 # set <JAIL> unbanip [--report-absent] <IP> ... <IP>
 > fail2ban-client set sshd unbanip 99.99.99.98
 1
+```
+
+Desbloquear todos los hosts:
+
+```shell
+> fail2ban-client unban --all
 ```
 
 Definir y obtener diferentes parámetros de configuración:
