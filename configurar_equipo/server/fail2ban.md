@@ -452,6 +452,36 @@ No IP address/network is ignored
 > fail2ban-client set sshd addlogpath /var/log/auth.log
 ```
 
+Comprobar si una cadena hace match con un regex
+
+```shell
+# fail2ban-regex <LOG> <REGEX>
+
+$ fail2ban-regex '10.0.2.2 2023-02-06 19:48:16.011 UTC [9927] postgres@postgres FATAL:  password authentication failed for user "postgres"'  "^<HOST>.+FATAL: +password authentication failed for user.+$"
+
+Running tests
+=============
+Use   failregex line : ^<HOST>.+FATAL: +password authentication failed fo...
+Use      single line : 10.0.2.2 2023-02-06 19:48:16.011 UTC [9927] postgr...
+
+Results
+=======
+Failregex: 1 total
+|-  #) [# of hits] regular expression
+|   1) [1] ^<HOST>.+FATAL: +password authentication failed for user.+$
+-
+Ignoreregex: 0 total
+
+Date template hits:
+|- [# of hits] date format
+|  [1] ExYear(?P<_sep>[-/.])Month(?P=_sep)Day(?:T|  ?)24hour:Minute:Second(?:[.,]Microseconds)?(?:\s*Zone offset)?
+-
+
+Lines: 1 lines, 0 ignored, 1 matched, 0 missed
+[processed in 0.03 sec]
+
+```
+
 ### Limitaciones
 
 ---
