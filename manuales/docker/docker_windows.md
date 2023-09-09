@@ -16,23 +16,7 @@ Para poder ejecutar un fichero `docker-compose.yml` hace falta un plugin para Do
 
 ## Instalar `docker` y `docker compose` en Windows.
 
-En primer lugar hay que instalar WSL. Un "plugin" de Microsoft para Windows, que permite ejecutar un Linux dentro de Windows. Simplemente hay que abrir una terminal de Windows o PowerShell, escribir:
-
-```
-wsl --install
-```
-
-y reiniciar.
-
-En el menú de Windows aparecerá un nuevo icono para Ubuntu, lo abrimos y definimos nombre de usuario y password.
-
-A continuación podremos usar Linux en modo administrador desde la línea de comandos escribiendo en un PowerShell
-
-```
-wsl -u root
-```
-
-Tras la primera instalación conviene actualizar el sistema ejecutando `apt update && apt upgrade`
+En primer lugar instalaremos WSL. Un "plugin" de Microsoft para Windows, que permite ejecutar un Linux dentro de Windows. Ver `wsl/wsl_instalar.md`
 
 Una vez instalado WSL podemos instalar Docker.
 
@@ -40,20 +24,6 @@ En Windows tendríamos dos opciones.
 
 -   Descargar e instalar Docker Desktop [desde la página de Docker](https://docs.docker.com/desktop/install/windows-install/). Opción recomendada.
 -   Descargar e instalar Docker directamente en Linux
-
-Una vez instalado Docker debemos editar un fichero de configuración. En WSL en ocasiones [hay problemas con los volúmenes compartidos](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly#ensure-volume-mounts-work) (por ejemplo pasa con la imagen de `postgis`).
-
-Cuidado al copiar el siguiente comando. Son varias líneas que deben copiarse y pegarse a la vez.
-```
-echo '
-[automount]
-root = /
-options = "metadata"
-' >> /etc/wsl.conf
-```
-
-Después debemos volver a reiniciar Windows.
-
 
 ### Instalar docker directamente en Linux
 
@@ -69,16 +39,12 @@ apt update
 apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 
-# si esto saca un mensaje de hello world todo ha ido bien
+# Si este comando imprime un mensaje de 'hello world' todo ha ido bien
 docker run hello-world
 ```
 
-
-
 ### Referencias
 
--   https://learn.microsoft.com/en-us/windows/wsl/install
--   https://learn.microsoft.com/en-us/windows/wsl/setup/environment
 -   https://docs.docker.com/desktop/install/windows-install/
 
 ## Ejecutar un docker-compose.yml desde Docker Desktop
