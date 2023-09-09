@@ -18,7 +18,7 @@ Algunos comentarios sobre como usar Vagrant. Pensados desde el punto de vista de
 -   Shift + Clic Dcho dentro de la carpeta -> Abrir terminal
 
 ```
-vagrant box add NOMBRE_CUALQUIERA path/to/mynew.box
+vagrant box add NOMBRE_CUALQUIERA <file:://C:/path/to/mynew.box>
 vagrant init NOMBRE_CUALQUIERA
 ```
 
@@ -33,9 +33,7 @@ end
 
 Vagrant.configure(2) do |config|
 
-    # no modificar esta línea de como esté en el fichero original
-    # o copiar el valor del fichero original
-    config.vm.box = XXXX
+    config.vm.box = NOMBRE_CUALQUIERA
 
     config.vm.box_check_update = false
 
