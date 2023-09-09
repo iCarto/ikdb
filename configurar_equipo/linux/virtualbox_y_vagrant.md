@@ -64,6 +64,7 @@ vagrant plugin install vagrant-vbguest
 
 -   Vagrant hay que actualizarlo a mano descargando el paquete de nuevo
 -   Los plugins se actualizan mediante `vagrant plugin update`
+-   Aprovechar para eliminar boxes desactualizados `vagrant box prune`
 
 ### Plugins que no se deben usar
 
