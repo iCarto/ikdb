@@ -26,11 +26,14 @@ Algunos conceptos de base, sin profundizar en detalles:
 -   Durante la instalación de Ubuntu escoge el SSD como disco principal
 -   Cifra el disco con la configuración por defecto de Ubuntu
 -   Acepta la configuración por defecto de Ubuntu en cuanto a particiones, swap, ...
--   Disminuye el valor `swappiness`. El número concreto varía según la guía. La única forma de obtenerlo es probar. Yo lo pongo a 20.
+-   Disminuye el valor `swappiness`. El número concreto varía según la guía. La única forma de obtenerlo es probar. Yo lo pongo a 15.
 
 ```bash
 # Editar /etc/sysctl.conf y añadir/editar `m.swappiness=20`
-echo -e "vm.swappiness=20" | sudo tee -a /etc/sysctl.conf
+echo -e "vm.swappiness=15" | sudo tee -a /etc/sysctl.conf
+
+# O en lugar de eso se puede crear un fichero propio de configuraciones
+echo -e "vm.swappiness=15" | sudo tee -a /etc/sysctl.d/60-custom
 ```
 
 ## Referencias
