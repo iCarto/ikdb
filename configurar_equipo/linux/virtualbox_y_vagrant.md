@@ -43,12 +43,14 @@ Usando vagrant una forma sencilla de mantener el "guest addition" actualizado es
 
 ## Vagrant
 
-La versión de los repositorios suele estar _demasiado_ anticuada, por lo que es mejor [descargarlo desde la propia web](https://www.vagrantup.com/downloads.html), y mantener el paquete actualizado de forma manual.
+La versión de los repositorios suele estar _demasiado_ anticuada, por lo que es mejor el ppa oficial de hashicorp
 
 ```
-VERSION=2.2.18
-wget "https://releases.hashicorp.com/vagrant/${VERSION}/vagrant_${VERSION}_x86_64.deb"
-sudo dpkg -i "vagrant_${VERSION}_x86_64.deb"
+
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install vagrant
+
 vagrant version
 ```
 
@@ -62,7 +64,7 @@ vagrant plugin install vagrant-vbguest
 
 ### Actualizar Vagrant
 
--   Vagrant hay que actualizarlo a mano descargando el paquete de nuevo
+-   Se actualiza automáticamente desde el repositorio oficial
 -   Los plugins se actualizan mediante `vagrant plugin update`
 -   Aprovechar para eliminar boxes desactualizados `vagrant box prune`
 

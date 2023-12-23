@@ -57,7 +57,7 @@ bucardo stop
 apt-get remove --purge bucardo
 
 # dependencias básicas
-apt-get install postgresql-plperl-${PG_VERSION} libdbix-safe-perl
+apt-get install postgresql-plperl-${PG_VERSION} libdbix-safe-perl libdbd-pg-perl
 
 wget https://github.com/bucardo/bucardo/archive/5.6.0.tar.gz
 tar zxf 5.6.0.tar.gz

@@ -29,11 +29,7 @@ Algunos conceptos de base, sin profundizar en detalles:
 -   Disminuye el valor `swappiness`. El número concreto varía según la guía. La única forma de obtenerlo es probar. Yo lo pongo a 15.
 
 ```bash
-# Editar /etc/sysctl.conf y añadir/editar `m.swappiness=20`
-echo -e "vm.swappiness=15" | sudo tee -a /etc/sysctl.conf
-
-# O en lugar de eso se puede crear un fichero propio de configuraciones
-echo -e "vm.swappiness=15" | sudo tee -a /etc/sysctl.d/60-custom
+echo -e "vm.swappiness=15" | sudo tee -a /etc/sysctl.d/60-myconfig.conf
 ```
 
 ## Referencias
@@ -45,6 +41,7 @@ echo -e "vm.swappiness=15" | sudo tee -a /etc/sysctl.d/60-custom
 -   https://askubuntu.com/questions/313564/why-encrypt-the-swap-partition
 -   https://ubuntuforums.org/showthread.php?t=2397034
 -   https://help.ubuntu.com/community/SwapFaq
+-   http://fosswire.com/post/2009/02/sysctl-swappiness/
 
 ## Investigaciones futuras
 

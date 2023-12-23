@@ -7,9 +7,10 @@ set -e
 install_postgres_ppa() {
     # Borrar el source antiguo si existe
     rm /etc/apt/sources.list.d/pgdg.list*
-    echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
-    wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
-    apt-get update
+
+    sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+    apt update
 }
 
 install_postgres() {
@@ -22,12 +23,9 @@ install_postgres() {
 
     mv "/etc/postgresql/${PG_VERSION}/main/postgresql.conf" "/etc/postgresql/${PG_VERSION}/main/postgresql.conf.${PG_VERSION}.org"
     grep -v '^#' "/etc/postgresql/${PG_VERSION}/main/postgresql.conf.${PG_VERSION}.org" | grep '^[ ]*[a-z0-9]' > "/etc/postgresql/${PG_VERSION}/main/postgresql.conf"
-    grep -v '^#' "/etc/postgresql/${PG_VERSION}/main/postgresql.conf.${PG_VERSION}.org" | grep '^[ ]*[a-z0-9]' > "/etc/postgresql/${PG_VERSION}/main/postgresql.conf.${PG_VERSION}.org.no_comments"
 
     mv "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf" "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf.${PG_VERSION}.org"
     grep -v '^#' "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf.${PG_VERSION}.org" | grep '^[ ]*[a-z0-9]' > "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf"
-    grep -v '^#' "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf.${PG_VERSION}.org" | grep '^[ ]*[a-z0-9]' > "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf.${PG_VERSION}.org.no_comments"
-
 }
 
 ensure_postgres_config_permissions() {
@@ -37,14 +35,12 @@ ensure_postgres_config_permissions() {
     chmod 644 "/etc/postgresql/${PG_VERSION}/main/postgresql.conf"
 
     chmod a-w "/etc/postgresql/${PG_VERSION}/main/postgresql.conf.${PG_VERSION}.org"
-    chmod a-w "/etc/postgresql/${PG_VERSION}/main/postgresql.conf.${PG_VERSION}.org.no_comments"
-    chmod a-w "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf.${PG_VERSION}.org.no_comments"
 }
 
 purge_postgres() {
     local OLD_PG_VERSION=${1}
 
-    if [ -z "${OLD_PG_VERSION}" ]; then
+    if [[ -z "${OLD_PG_VERSION}" ]]; then
         echo "Missed parameter"
         return 1
     fi
@@ -76,8 +72,7 @@ dump_restore_bd() {
     # Si el dump no usa `CREATE EXTENSION` hacerlo mano
     # sudo -u postgres psql -p 5433 -d "${DATABASE}" -c "CREATE EXTENSION postgis;"
 
-    # para postgis-3 hay que usar en este punto POSTGIS_VERSION=3.0
-    perl "/usr/share/postgresql/${PG_VERSION}/contrib/postgis-${POSTGIS_VERSION}/postgis_restore.pl" "/tmp/${DATABASE}.dump" | sudo -u postgres psql -p 5433 -d "${DATABASE}" 2> /tmp/errors.txt
+    postgis_restore -v "/tmp/${DATABASE}.dump" | sudo -u postgres psql -p 5433 -d "${DATABASE}" 2> /tmp/errors.txt
 }
 
 # Variables used:
