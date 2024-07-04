@@ -68,28 +68,7 @@ pyenv, más sus plugins tiene bastantes [comandos](https://github.com/pyenv/pyen
 
 En iCarto usamos `pyenv` para gestionar las versiones de Python en el entorno de desarrollo, y lo combinamos con `virtualenvwrapper`.
 
-Cuando creamos un _virtualenv_ para un proyecto lo hacemos a través de scripts de forma parecida a esta:
-
-```shell
-PROJECT_NAME=foo
-PROJECT_ROOT_FOLDER="~/repos/${PROJECT_NAME}"
-PYTHON_VERSION=3.9.7
-
-command -v deactivate && deactivate
-rmvirtualenv "${PROJECT_NAME}"
-
-if ! pyenv versions | grep "${PYTHON_VERSION}" > /dev/null 2>&1; then
-    pyenv update
-    pyenv install "${PYTHON_VERSION}"
-fi
-
-PYTHON_VERSION_BINARY_PATH="$(pyenv shell "${PYTHON_VERSION}" && pyenv which python)"
-
-# https://github.com/pexpect/pexpect/commit/71bbdf52ac153c7eaca631637ec96e63de50c2c7
-mkvirtualenv -p "${PYTHON_VERSION_BINARY_PATH}" -a "${PROJECT_ROOT_FOLDER}" "${PROJECT_NAME}" || true
-
-workon "${PROJECT_NAME}"
-```
+Ver el script `scripts/install.sh` de los proyectos iCarto para un ejemplo de uso.
 
 Para crear _virtualenv_ temporales o de pruebas podemos jugar con la variable `VIRTUALENVWRAPPER_PYTHON` de nuestro `.bashrc` para tener una versión de Python predefinida con lo que simplemente ejecutaríamos: `mkvirtualenv -a mi_proyecto mi_projecto`, usar una sentencia como el ejemplo de virtualenvwrapper que pusimos en una sección anterior, o incluso crear una pequeña función en nuestro `.bashrc`
 
@@ -117,4 +96,4 @@ eval "$(pyenv init -)"
 ' >> ~/.bashrc
 ```
 
-Tras instalarlo debemos hacer un _logout_ del sistema (_host_, equipo de desarrollo) para que esté plenamente activo. Si quisiéramos usarlo en la misma sesión o en un script de provisionamiento es un poco más complicado. Se pueden ver ejemplos en los directorios `server` de los [proyectos publicados de iCarto](https://gitlab.com/icarto).
+Tras instalarlo debemos hacer un _logout_ del sistema (_host_, equipo de desarrollo) para que esté plenamente activo. Si quisiéramos usarlo en la misma sesión o en un script de provisionamiento es un poco más complicado. Se pueden ver ejemplos en los directorios `server` de los proyectos de iCarto.

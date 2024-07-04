@@ -130,6 +130,8 @@ Para empezar a usar [_natural keys_ en lugar de _surrogate keys_](https://tapoue
 -   El uso de UUID
     -   http://blog.joevandyk.com/2013/08/14/uuids-as-keys/
     -   https://www.are.na/tom-macwright/the-uuid-discourse
+    -   https://blog.rustprooflabs.com/2024/01/postgres-uuid
+    -   https://www.cybertec-postgresql.com/en/postgres-ai-bot-interview-for-pgsql-phriday-015/
 -   Claves primarias de múltiples columnas
 -   Claves primarias no numéricas
 -   Si existe valor en conocer un supuesto orden de inserción (o controlarlo de algún modo) usando el SERIAL, o es mejor relegar en `created_at` o similares.
