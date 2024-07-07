@@ -12,6 +12,7 @@ Para ello, centrándose en Linux, hay varias opciones:
 -   Compilar
 -   Usar _pyenv_
 -   Vagrant o Docker
+-   Usar _asdf_
 
 ## Versión de Python por defecto
 
@@ -72,6 +73,20 @@ Usar pyenv puede parecer similar a usar un PPA. Se depende de un tercero, no ofi
 -   Los PPA (.deb, ...) para muchos equipos son magia. Mientras que compilar python, escribir scripts en bash y configurar la shell no tiene problema.
 
 En (python_tooling_pyenv)[./python_tooling_pyenv.md] comentamos más cosas sobre su uso.
+
+## asdf
+
+[asdf](https://github.com/asdf-vm/asdf) es una herramienta que permite gestionar distintas versiones de varias aplicaciones. Nació como un substituto unificado de `nvm`, `rvm`, `pyenv`, ... pero actualmente gestiona también aplicaciones como `bat`, `exa`, se lleva bien con `direnv`, ...
+
+Cada aplicación gestionada es un plugin y [tiene decenas](https://github.com/asdf-vm/asdf-plugins).
+
+El funcionamiento es similar al de otros gestores, scripts en bash que actuan cómo `shims`. `asdf` pone de primeros en el `$PATH` sus propios ejecutables que llaman al binario concreto que toca.
+
+En el proyecto se incluye un `.tools-versions` con las versiones deseadas y cuando se entra al directorio y se invoca el ejecutable `python what-ever` el shim intercepta la llamada.
+
+No es una mala opción si se hace "multilenguaje" y realmente se necesitan controlar bien distintas versiones. Si básicamente sólo programas en un lenguaje, es mejor usar un gestor específico para esa lenguaje, y combinarlo con algo como Nix (buscar `nix` en `ikdb` para más info)
+
+Uno de sus problemas es que cuando se instalan binarios con el lenguaje que gestiona (ie `pip install black`), se puede liar y no tener bien controlado el nuevo binario (ie: `black`) por lo que hay que hacer un `asdf reshims`.
 
 ## Conclusiones
 
