@@ -49,6 +49,9 @@ SELECT
 FROM
     sizes
 ORDER BY
-    1
-    , 2;
+    -- ordenar por esquema y tabla
+    -- 1 , 2
+    -- ordenador por tamaño
+    total_table_bytes desc
+    ;
 
