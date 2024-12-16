@@ -54,13 +54,7 @@ sudo apt update && sudo apt install vagrant
 vagrant version
 ```
 
-En principio no es necesaria ninguna configuración, pero hay varios plugins útiles que pueden ser instalados:
-
-```
-# Actualiza `guest additions` en cada guest
-# https://github.com/dotless-de/vagrant-vbguest
-vagrant plugin install vagrant-vbguest
-```
+No es necesaria ninguna configuración. No es necesario instalar ningún plugin.
 
 ### Actualizar Vagrant
 
@@ -71,3 +65,4 @@ vagrant plugin install vagrant-vbguest
 ### Plugins que no se deben usar
 
 -   vagrant-cachier. Da más problemas de los que soluciona. Es continuo el problema de permisos, y errores aleatorios.
+-   [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest). En su momento resultaba útil para mantener actualizada la versión de guest additions dentro de la vm. En las versiones actuales ya no resulta necesario y el plugin ya no tiene mantenimiento. A no ser que haya algún problema concreto la recomendación es configurar los vagrant [sin el chequeo](https://developer.hashicorp.com/vagrant/docs/providers/virtualbox/configuration#checking-for-guest-additions).
